@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import "./App.css"
 
 import Header from "../Header/Header";
-import Main from "../Main/Main";
+import Landing from "../Landing/Landing";
 function App() {
     const [currentUser, setUserData] = React.useState({});
     return (
@@ -13,7 +14,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Main/>}
+              element={<Landing/>}
             />
             {/* <Route
               path="/signin"
