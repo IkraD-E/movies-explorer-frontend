@@ -98,11 +98,17 @@
 .container__header {
     font-size: 20px;
     font-weight: 400;
+
+    padding: 70px 0 0;
+    margin: 0;
 }
 
 .container__text {
     font-size: 14px;
     font-weight: 400;
+
+    padding: 26px 0 0;
+    margin: 0;
 }
 
 .elapsed-time__list {
@@ -115,11 +121,16 @@
     list-style-type: none;
     display: grid;
     margin: 0;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.elapsed-itme__text {
+    margin: 0;
+    padding: 14px 0;
 }
 
 .elapsed-time__element_long{
-    grid-column: span 3;
+    grid-column: span 4;
 }
 
 .elapsed-time__element {
@@ -243,6 +254,8 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 400;
+
+    padding-top: 100px;
 }
 
 .student__image {

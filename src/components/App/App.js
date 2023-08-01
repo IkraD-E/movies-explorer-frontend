@@ -5,6 +5,7 @@ import "./App.css"
 
 import Header from "../Header/Header";
 import Landing from "../Landing/Landing";
+import Footer from "../Footer/Footer";
 function App() {
     const [currentUser, setUserData] = React.useState({});
     return (
@@ -41,6 +42,7 @@ function App() {
                 /> }
             /> */}
           </Routes>
+          <Footer></Footer>
         </div>
       </div>
     );
