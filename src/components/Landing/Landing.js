@@ -1,7 +1,8 @@
 import React from "react";
 import landingImage from "../../images/landing-logo.svg";
 import "./Landing.css"
-
+import studentImage from "../../images/student__image.jpg"
+import studentListImage from "../../images/student-list__link-image.svg"
 
 function Landing() {
     return (
@@ -23,8 +24,8 @@ function Landing() {
           </div>
         </section>
         <section className="section" id="about">
-          <div className="about__container_header">
-            <h2 className="about__header">
+          <div className="section__container-header">
+            <h2 className="section__header">
               О проекте
             </h2>
           </div>
@@ -68,6 +69,67 @@ function Landing() {
               <p className="elapsed-itme__text">
                 Front-end
               </p>
+            </li>
+          </ul>
+        </section>
+        <section className="section" id="tech">
+          <div className="section__container-header">
+            <h2 className="section__header">
+              Технологии
+            </h2>
+          </div>
+          <div className="tech__main">
+            <h2 className="tech__header">7 технологий</h2>
+            <p className="tech__text">
+              На курсе веб-разработки мы освоили технологии, 
+              которые применили в дипломном проекте.
+            </p>
+            <ul className="tech-list">
+              <li className="tech-list__element">HTML</li>
+              <li className="tech-list__element">CSS</li>
+              <li className="tech-list__element">JS</li>
+              <li className="tech-list__element">React</li>
+              <li className="tech-list__element">Git</li>
+              <li className="tech-list__element">Express.js</li>
+              <li className="tech-list__element">mongoDB</li>
+            </ul>
+          </div>
+        </section>
+        <section className="section" id="student">
+          <div className="section__container-header">
+            <h2 className="section__header">
+              Студент
+            </h2>
+          </div>
+          <div className="student__main">
+            <div className="student__text-part">
+              <h2 className="student__header">Ikra:D</h2>
+              <p className="student__sub-text">
+                Фронтенд-разработчик, 21 год
+              </p>
+              <p className="student__text">
+                Живу в Иркутске, закончил ВГИК. Холост, DJ, VJ, Светооператор, Видеооператор, 
+                а теперь ещё Фронтенд-разработчик. 
+              </p>
+              <a href="https://github.com/IkraD-E" type="button" className="link student__link">
+                Github
+              </a>
+            </div>
+            <img className="student__image" src={studentImage} alt="Фотография Ikra:D"/>
+          </div>
+          <h2 className="student-list__header">Портфолио</h2>
+          <ul className="student-list">
+            <li className="student-list__element">
+              <h3 className="student-list__title">Статичный сайт</h3>
+              <img className="student-list__link-image" src={studentListImage} alt="Перейти на страницу"/>
+            </li>
+            <li className="student-list__element">
+              <h3 className="student-list__title">Адаптивный сайт</h3>
+              <img className="student-list__link-image" src={studentListImage} alt="Перейти на страницу"/>
+            </li>
+            <li className="student-list__element">
+              <h3 className="student-list__title">Одностраничное приложение</h3>
+              <img className="student-list__link-image" src={studentListImage} alt="Перейти на страницу"/>
             </li>
           </ul>
         </section>
