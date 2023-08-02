@@ -7,7 +7,7 @@ import studentListImage from "../../images/student-list__link-image.svg"
 function Landing() {
     return (
       <main className="landing">
-        <section className="section section_grey">
+        <section className="section landing">
           <div className="landing__main">
             <div className="landing__info">
               <h1 className="landing__header">
@@ -23,7 +23,7 @@ function Landing() {
             <img className="landing__picture" src={landingImage} alt="Логотип"/>
           </div>
         </section>
-        <section className="section" id="about">
+        <section className="section about" id="about">
           <div className="section__container-header">
             <h2 className="section__header">
               О проекте
@@ -72,7 +72,7 @@ function Landing() {
             </li>
           </ul>
         </section>
-        <section className="section" id="tech">
+        <section className="section tech" id="tech">
           <div className="section__container-header">
             <h2 className="section__header">
               Технологии
@@ -95,7 +95,7 @@ function Landing() {
             </ul>
           </div>
         </section>
-        <section className="section" id="student">
+        <section className="section student" id="student">
           <div className="section__container-header">
             <h2 className="section__header">
               Студент

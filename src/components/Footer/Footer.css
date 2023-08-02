@@ -21,10 +21,13 @@
     text-align: center;
 
     margin: 0;
-    padding: 0 0 41px;
+    padding: 0 0 20px;
+
+    border-bottom: 1px solid #E8E8E8;
 }
 
 .footer__container {
+    padding-top: 20px;
     display: flex;
     justify-content: space-between;
 }
