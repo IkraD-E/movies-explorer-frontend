@@ -10,10 +10,8 @@ function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, link
   const {
     values,
     handleChange,
-    resetFrom,
     errors,
     isValid,
-    isValidInputs
   } = useFormAndValidation();
 
   function handleSubmit(e) {

@@ -10,6 +10,7 @@ import AuthForm from "../AuthForm/AuthForm";
 
 import { api } from '../../utils/Api';
 import { auth } from "../../utils/Auth";
+import NotFound from "../NotFound/NotFound";
 
 function App() {
   const [currentUser, setUserData] = React.useState({});
@@ -111,7 +112,8 @@ function App() {
                 afterWords="Ещё не зарегистрированы?&nbsp;"
                 linkText="Регистрация"
                 link="/signup"
-              />}
+              />
+            }
           />
           <Route
             path="/signup"
@@ -124,7 +126,12 @@ function App() {
                 afterWords="Уже зарегистрированы?&nbsp;"
                 linkText="Войти"
                 link="/signin"
-              /> }
+              />
+            }
+          />
+          <Route
+            path="*"
+            element={<NotFound/>}
           />
         </Routes>
       </div>
