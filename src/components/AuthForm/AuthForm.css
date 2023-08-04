@@ -96,6 +96,16 @@
     opacity: 0.55;
 }
 
+.auth__error {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #FF0000;
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+}
+
 @media screen and (max-width: 970px) {
     .auth__input {
         margin: 0 30px 173px;
@@ -123,11 +133,21 @@
     transition: opacity .5s ease-in-out;
     box-sizing: border-box;
     background: #3456F3;
+    border: none;
     border-radius: 2px;
 }
 
 .auth__submit:hover {
     opacity: 0.85;
+}
+
+.auth__submit_disabled {
+    cursor: no-drop;
+    pointer-events:none;
+    background-color: #fff;
+    border: #000 solid 1px;
+    color: #000;
+    opacity: 0.5;
 }
 
 @media screen and (max-width: 970px) {

@@ -1,22 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import logo from "../../images/header__logo.svg";
 
 import "./AuthForm.css"
 
 function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, linkText, link}) {
+  const {
+    values,
+    handleChange,
+    resetFrom,
+    errors,
+    isValid,
+    isValidInputs
+  } = useFormAndValidation();
+
   function handleSubmit(e) {
     e.preventDefault();
-    onSubmit(
-      userEmail.values, userPassword.values, userName.values
-    );
+    onSubmit(values);
   }
-  const userEmail = useForm("");
-  const userPassword = useForm("");
-  const userName = useForm("");
-  console.log(isRegistration);
 
   return (
     <main className="content">
@@ -41,9 +44,10 @@ function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, link
                 name="name"
                 className="auth__input"
                 placeholder="Введите имя" 
-                value={userName.values}
-                onChange={userName.handleChange}
+                value={values.name || ""}
+                onChange={handleChange}
                 />
+                <span className="auth__error name-error">{errors.name || ""}</span>
               </>
             }
             <label for="email" className="auth__label">E-mail</label>
@@ -51,15 +55,16 @@ function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, link
               required 
               minLength="2" 
               maxLength="30" 
-              type="text" 
+              type="email" 
               id="email"
               name="email"
               className="auth__input"
               placeholder="Введите Email"
-              value={userEmail.values}
-              onChange={userEmail.handleChange}
+              value={values.email || ""}
+              onChange={handleChange}
             />
-            <label for="email" className="auth__label">Пароль</label>
+            <span className="auth__error email-error">{errors.email || ""}</span>
+            <label for="password" className="auth__label">Пароль</label>
             <input 
               required 
               minLength="2" 
@@ -69,12 +74,13 @@ function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, link
               name="password"
               className="auth__input"
               placeholder="Введите пароль" 
-              value={userPassword.values}
-              onChange={userPassword.handleChange}
+              value={values.password || ""}
+              onChange={handleChange}
             />
+            <span className="auth__error password-error">{errors.password || ""}</span>
           </div>
           <button 
-            className="auth__submit" 
+            className={`auth__submit ${isValid ? "" : "auth__submit_disabled"}`}
             type="submit"
           >
             {btnText}

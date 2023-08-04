@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { CurrentUserContext } from "../../context/CurrentUserContext";
+
 import "./App.css"
 
 import Landing from "../Landing/Landing";
@@ -75,6 +77,12 @@ function App() {
         console.log(`Ошибка входа пользователя: ${err}`);
       });
   }
+
+  function handleSignOut() {
+    auth.logout();
+    setLoggedIn(false);
+    navigate('/signin');
+  }
   
   React.useEffect(() => {
     loggedIn && Promise.all([api.getUserDataFromServer(), api.getMoviesFromServer()])
@@ -86,7 +94,8 @@ function App() {
   }, [loggedIn]);
 
   return (
-    <div className="body">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="body">
       <div className="page">
         <Routes>
           <Route
@@ -121,6 +130,8 @@ function App() {
         </Routes>
       </div>
     </div>
+    </CurrentUserContext.Provider>
+    
   );
 }
 
