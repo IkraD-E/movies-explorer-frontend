@@ -54,7 +54,7 @@
     padding: 0;
     border: none;
     width: 100%;
-    max-height: 266px;
+    min-height: 266px;
 }
 
 @media screen and (max-width: 970px) {
@@ -82,28 +82,36 @@
     width: 100%;
 
     box-sizing: border-box;
-    margin: 10px 0 20px;
+    margin: 10px 0;
     padding: 15px;
     border: none;
     display: block;
     background: #F4F4F4;
     border-radius: 8px;
 
-    transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out, color 1s ease-in-out, border-color .5s ease-in-out;
 }
 
 .auth__input:focus {
+    border-color: #000;
     opacity: 0.55;
+}
+
+.auth__input_invalid {
+    color: #EE3465;
 }
 
 .auth__error {
     font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    color: #FF0000;
-    min-height: 30px;
-    display: flex;
+    font-size: 10px;
+    color: #EE3465;
+    min-height: 12px;
+    display: none;
     align-items: center;
+}
+
+.auth__error_active {
+    display: flex;
 }
 
 @media screen and (max-width: 970px) {
@@ -130,11 +138,12 @@
     margin-top: 69px;
     width: 100%;
     cursor: pointer;
-    transition: opacity .5s ease-in-out;
     box-sizing: border-box;
     background: #3456F3;
     border: none;
     border-radius: 2px;
+
+    transition: opacity 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
 .auth__submit:hover {

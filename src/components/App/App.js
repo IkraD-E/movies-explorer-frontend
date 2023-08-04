@@ -6,7 +6,6 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 import "./App.css"
 
 import Landing from "../Landing/Landing";
-import Footer from "../Footer/Footer";
 import AuthForm from "../AuthForm/AuthForm";
 
 import { api } from '../../utils/Api';
