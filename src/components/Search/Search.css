@@ -1,0 +1,136 @@
+.search {
+    max-width: 1280px;
+    width: 100%;
+
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+
+    padding: 70px 70px 80px;
+    margin: 0;
+    box-sizing: border-box;
+
+    background-color: #FAFAFA;
+}
+
+.search__container {
+    max-width: 1140px;
+    width: 100%;
+
+    background-color: #f4f4f4;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 25px;
+    box-sizing: border-box;
+
+    border-radius: 9px;
+}
+
+.search__image { 
+    max-width: 15px;
+    width: 100%;
+    max-height: 15px;
+    margin: 7px;
+
+    object-fit: cover;
+}
+
+.search__form {
+    width: 100%;
+    min-height: 22px;
+    margin: 0;
+    padding: 0 10px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search__input {
+    font-weight: 400;
+    font-size: 13px;
+    color: #000;
+
+    max-width: 740px;
+    width: 100%;
+
+    box-sizing: border-box;
+    border: none;
+    background: #F4F4F4;
+    border-radius: 8px;
+
+    transition: opacity .5s ease-in-out, color 1s ease-in-out, border-color .5s ease-in-out;
+}
+
+.search__btn-container {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 111px;
+    width: 100%;
+    box-sizing: border-box;
+    border-right: #E8E8E8 solid 1px;
+}
+
+.search__submit {
+    max-width: 34px;
+    width: 100%;
+    min-height: 34px;
+    padding: 0;
+    margin-right: 30px;
+
+    background-color: #3456F3;
+    border: none;
+    border-radius: 50%;
+
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__base {
+    background: #FAFAFA;
+    box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+    border: none;
+    border-radius: 16px;
+
+    max-width: 36px;
+    width: 100%;
+    min-height: 20px;
+
+    padding: 0;
+    margin: 0;
+    margin-left: 29px;
+
+    display: flex;
+    align-items: center;
+}
+
+.search__tumb {
+    background: #2BE080;
+    max-width: 18px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 2px;
+}
+
+.search__text {
+    padding: 0;
+    margin: 0;
+    margin-left: 14px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+
+    color: #000000;
+}

@@ -11,6 +11,7 @@ import AuthForm from "../AuthForm/AuthForm";
 import { api } from '../../utils/Api';
 import { auth } from "../../utils/Auth";
 import NotFound from "../NotFound/NotFound";
+import Movies from "../Movies/Movies";
 
 function App() {
   const [currentUser, setUserData] = React.useState({});
@@ -128,6 +129,10 @@ function App() {
                 link="/signin"
               />
             }
+          />
+          <Route
+            path="/movies"
+            element={<Movies/>}
           />
           <Route
             path="*"

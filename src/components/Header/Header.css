@@ -8,6 +8,8 @@
     width: 100%;
     padding: 18px 70px;
     box-sizing: border-box;
+
+    background-color: #FAFAFA;
 }
 
 .header__nav {
