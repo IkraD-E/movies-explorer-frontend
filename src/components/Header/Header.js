@@ -1,22 +1,22 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
+import Navigation from "../Navigation/Navigation";
 
 import logo from "../../images/header__logo.svg";
 
 import "./Header.css";
 
 function Header() {
+  const path = useLocation().pathname;
   return (
-    <div className="header">
+    <div className={`header ${(path === "/signup" || path === "/signin") && "header_auth"}`}>
       <img className="header__logo" src={logo} alt="Логотип"/>
-      <div className="header__nav">
-        <NavLink to="/signup" className='header__link'>
-          Регистрация
-        </NavLink>
-        <NavLink to="/signin" className='header__btn'>
-          Войти
-        </NavLink>
-      </div>
+      {path === "/signup" || path === "/signin" ? 
+        "" : 
+      (
+        <Navigation path={path}/>
+      )}
     </div>
   );
 }

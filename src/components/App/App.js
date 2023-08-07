@@ -12,6 +12,7 @@ import { api } from '../../utils/Api';
 import { auth } from "../../utils/Auth";
 import NotFound from "../NotFound/NotFound";
 import Movies from "../Movies/Movies";
+import Header from "../Header/Header";
 
 function App() {
   const [currentUser, setUserData] = React.useState({});
@@ -97,49 +98,61 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
-      <div className="page">
-        <Routes>
-          <Route
-            path="/"
-            element={<Landing/>}
-          />
-          <Route
-            path="/signin"
-            element={
-              <AuthForm 
-                onSubmit={handleLogInSubmit} 
-                formName="Рады видеть!" 
-                btnText="Войти" 
-                afterWords="Ещё не зарегистрированы?&nbsp;"
-                linkText="Регистрация"
-                link="/signup"
-              />
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <AuthForm 
-                onSubmit={handleRegisterSubmit} 
-                isRegistration={true}
-                formName="Добро пожаловать!" 
-                btnText="Зарегистрироваться"
-                afterWords="Уже зарегистрированы?&nbsp;"
-                linkText="Войти"
-                link="/signin"
-              />
-            }
-          />
-          <Route
-            path="/movies"
-            element={<Movies/>}
-          />
-          <Route
-            path="*"
-            element={<NotFound/>}
-          />
-        </Routes>
-      </div>
+        <div className="page">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Landing>
+                  <Header/>
+                </Landing>
+              }
+            />
+            <Route
+              path="/signin"
+              element={
+                <AuthForm 
+                  onSubmit={handleLogInSubmit} 
+                  formName="Рады видеть!" 
+                  btnText="Войти" 
+                  afterWords="Ещё не зарегистрированы?&nbsp;"
+                  linkText="Регистрация"
+                  link="/signup"
+                >
+                  <Header/>
+                </AuthForm>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <AuthForm 
+                  onSubmit={handleRegisterSubmit} 
+                  isRegistration={true}
+                  formName="Добро пожаловать!" 
+                  btnText="Зарегистрироваться"
+                  afterWords="Уже зарегистрированы?&nbsp;"
+                  linkText="Войти"
+                  link="/signin"
+                >
+                  <Header/>
+                </AuthForm>
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <Movies>
+                  <Header/>
+                </Movies>
+              }
+            />
+            <Route
+              path="*"
+              element={<NotFound/>}
+            />
+          </Routes>
+        </div>
     </div>
     </CurrentUserContext.Provider>
     

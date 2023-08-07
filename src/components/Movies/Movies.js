@@ -6,7 +6,7 @@ import Search from "../Search/Search";
 
 
 
-function Movies({onCardDeleteClick, onCardSaveClick}) {
+function Movies({onCardDeleteClick, onCardSaveClick, children}) {
   const cardsList = [ 
     {
       "country": "russ",
@@ -46,7 +46,7 @@ function Movies({onCardDeleteClick, onCardSaveClick}) {
 
   return (
     <>
-      <Header/>
+      {children}
       <Search/>
       <MoviesCardList
         cardsList={cardsList} 

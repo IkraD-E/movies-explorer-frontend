@@ -9,55 +9,15 @@
     padding: 18px 70px;
     box-sizing: border-box;
 
+    background-color: #DDDEE3;
+}
+
+.header_auth {
+    margin: 0;
+    padding: 70px 442px 0;
     background-color: #FAFAFA;
 }
 
-.header__nav {
-    display: flex;
-    align-items: center;
-
-}
-
-.header__link {
-    margin: 0 0 0 10px;
-    padding: 8px 20px;
-    
-    box-sizing: border-box;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    display: flex;
-    align-items: center;
-    text-align: right;
-    text-decoration: none;
-
-    color: #000000;
-    background-color: transparent;
-    border: none;
-}
-
-.header__btn {
-    margin: 0 0 0 10px;
-    padding: 8px 20px;
-    
-    box-sizing: border-box;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    display: flex;
-    align-items: center;
-    text-align: right;
-    text-decoration: none;
-
-    color: #fff;
-    background-color: #3456F3;
-
-    border: 1px solid #000;
-    border-radius: 3px;
+.header_none {
+    display: none;
 }
