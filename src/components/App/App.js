@@ -14,9 +14,13 @@ import NotFound from "../NotFound/NotFound";
 import Movies from "../Movies/Movies";
 import Header from "../Header/Header";
 
+
+import { cardList } from "../../utils/const";
+import SavedMovies from "../SavedMovies/SavedMovies";
+
 function App() {
   const [currentUser, setUserData] = React.useState({});
-  const [movieList, setMovies] = React.useState([]);
+  const [movieList, setMovies] = React.useState(cardList);
   const [loggedIn, setLoggedIn] = React.useState(false);
   const navigate = useNavigate();
 
@@ -85,7 +89,7 @@ function App() {
     setLoggedIn(false);
     navigate('/signin');
   }
-  
+
   React.useEffect(() => {
     loggedIn && Promise.all([api.getUserDataFromServer(), api.getMoviesFromServer()])
       .then(([userData, movies]) => {
@@ -142,9 +146,19 @@ function App() {
             <Route
               path="/movies"
               element={
-                <Movies>
+                <Movies
+                  movieList={movieList}>
                   <Header/>
                 </Movies>
+              }
+            />
+            <Route
+              path="/saved-movies"
+              element={
+                <SavedMovies
+                  movieList={movieList}>
+                  <Header/>
+                </SavedMovies>
               }
             />
             <Route

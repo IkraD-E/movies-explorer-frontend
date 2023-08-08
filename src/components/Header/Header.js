@@ -10,14 +10,14 @@ import "./Header.css";
 function Header() {
   const path = useLocation().pathname;
   return (
-    <div className={`header ${(path === "/signup" || path === "/signin") && "header_auth"}`}>
+    (path === "/signup" || path === "/signin") ?
+    (<div className="header header_auth">
       <img className="header__logo" src={logo} alt="Логотип"/>
-      {path === "/signup" || path === "/signin" ? 
-        "" : 
-      (
+    </div>)  : (
+      <div className={`${path === "/" ? "header" : "header header_white"}`}>
+        <img className="header__logo" src={logo} alt="Логотип"/>
         <Navigation path={path}/>
-      )}
-    </div>
-  );
+      </div>) 
+  )
 }
 export default Header;

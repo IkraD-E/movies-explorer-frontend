@@ -1,13 +1,19 @@
 import React from "react";
+import { useState } from "react";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import searchImage from "../../images/search__image.svg"
 import searchImageWhite from "../../images/search__image_white.svg"
-import searchTumb from "../../images/search__tumb.svg"
 
 import "./Search.css"
 
 function Search() {
+  const [isActive, tuggleIsActive] = useState(false);
+
+  function tugleisTumbActive() {
+    tuggleIsActive(!isActive)
+  }
+
   const {
     values,
     handleChange,
@@ -41,10 +47,10 @@ function Search() {
             </button>
           </div>
           <button
-            className="search__base"
+            className={`search__tumb ${isActive ? "search__tumb_active" : ""}`}
             type="button"
+            onClick={tugleisTumbActive}
           >
-            <img className="search__tumb" src={searchTumb} alt="Переключатель короткометражек"/>
           </button>
         </form>
         <p className="search__text">Короткометражки</p>
