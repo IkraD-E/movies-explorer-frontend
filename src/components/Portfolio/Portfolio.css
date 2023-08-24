@@ -47,6 +47,41 @@
     max-width: 29px;
     width: 100%;
     max-height: 60px;
-    object-fit: none;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 1024px) {
+    .portfolio-list {
+        padding-bottom: 70px;
+    }
+    .portfolio-list__header {
+        margin-top: 90px;
+    }
+    .portfolio-list__title {
+        letter-spacing: -0.04em;
+        font-size: 28px;
+    }  
+}
+
+@media screen and (max-width: 720px) {
+    .portfolio-list {
+        padding-top: 20px;
+        padding-bottom: 70px;
+    }
+    .portfolio-list__header {
+        margin-top: 70px;
+        
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .portfolio-list__title {
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: -0.04em;
+    }
+    .portfolio-list__link-image {
+        max-width: 14px;
+        max-height: 14px;
+    }
 }

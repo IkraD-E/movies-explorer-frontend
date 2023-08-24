@@ -1,10 +1,10 @@
 import React from "react";
 
-import "./LandingSection.css"
+import "./MainSection.css"
 
-function LandingSection({ children, headerText }) {
+function MainSection({ children, headerText, sectionName }) {
     return (
-      <section className="section about" id="about">
+      <section className={`section ${sectionName}`} id="about">
         <div className="section__container-header">
           <h2 className="section__header">
             {headerText}
@@ -15,4 +15,4 @@ function LandingSection({ children, headerText }) {
     );
 }
 
-export default LandingSection;
+export default MainSection;

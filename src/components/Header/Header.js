@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from 'react-router-dom';
 
-import Navigation from "../Navigation/Navigation";
+import Navigation from "../Nav/Nav";
 
 import logo from "../../images/header__logo.svg";
 

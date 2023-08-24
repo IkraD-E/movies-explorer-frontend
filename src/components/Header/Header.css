@@ -21,3 +21,16 @@
     padding: 70px 442px 0;
     background-color: #FAFAFA;
 }
+
+
+@media screen and (max-width: 1024px) {
+    .header {
+        padding: 18px 30px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .header {
+        padding: 18px 14px;
+    }
+}

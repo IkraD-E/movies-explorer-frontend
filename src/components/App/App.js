@@ -5,7 +5,7 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 import "./App.css"
 
-import Landing from "../Landing/Landing";
+import Main from "../Main/Main";
 import AuthForm from "../AuthForm/AuthForm";
 
 import { api } from '../../utils/Api';
@@ -17,6 +17,7 @@ import Header from "../Header/Header";
 
 import { cardList } from "../../utils/const";
 import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [currentUser, setUserData] = React.useState({});
@@ -107,9 +108,9 @@ function App() {
             <Route
               path="/"
               element={
-                <Landing>
+                <Main>
                   <Header/>
-                </Landing>
+                </Main>
               }
             />
             <Route
@@ -161,6 +162,14 @@ function App() {
                 </SavedMovies>
               }
             />
+            <Route
+              path="/profile"
+              element={
+                <Profile>
+                  <Header/>
+                </Profile>
+              }
+            ></Route>
             <Route
               path="*"
               element={<NotFound/>}

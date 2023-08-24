@@ -11,13 +11,41 @@ function Techs() {
           которые применили в дипломном проекте.
         </p>
         <ul className="tech-list">
-          <li className="tech-list__element">HTML</li>
-          <li className="tech-list__element">CSS</li>
-          <li className="tech-list__element">JS</li>
-          <li className="tech-list__element">React</li>
-          <li className="tech-list__element">Git</li>
-          <li className="tech-list__element">Express.js</li>
-          <li className="tech-list__element">mongoDB</li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+              HTML
+            </p>
+          </li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+              CSS
+            </p>
+          </li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+              JS
+            </p>
+          </li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+              React
+            </p>
+          </li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+              Git
+            </p>
+          </li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+            Express.js
+            </p>
+          </li>
+          <li className="tech-list__element">
+            <p className="texh-list__text">
+              mongoDB
+            </p>
+          </li>
         </ul>
       </div>
      );

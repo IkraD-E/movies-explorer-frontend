@@ -1,4 +1,3 @@
-import { CurrentUserContext } from "../../context/CurrentUserContext";
 import React from "react";
 
 import "./MoviesCard.css"
