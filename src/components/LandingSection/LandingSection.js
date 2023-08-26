@@ -1,8 +1,8 @@
 import React from "react";
 
-import "./MainSection.css"
+import "./LandingSection.css"
 
-function MainSection({ children, headerText, sectionName }) {
+function LandingSection({ children, headerText, sectionName }) {
     return (
       <section className={`section ${sectionName}`} id="about">
         <div className="section__container-header">
@@ -15,4 +15,4 @@ function MainSection({ children, headerText, sectionName }) {
     );
 }
 
-export default MainSection;
+export default LandingSection;

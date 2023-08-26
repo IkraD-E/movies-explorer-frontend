@@ -17,9 +17,10 @@
 } 
 
 .header_auth {
-    margin: 0;
-    padding: 70px 442px 0;
+    margin: 0 auto;
+    padding: 70px 0;
     background-color: #FAFAFA;
+    max-width: 398px;
 }
 
 
@@ -27,10 +28,19 @@
     .header {
         padding: 18px 30px;
     }
+    .header_auth {
+        margin: 0;
+        padding: 232px 0 0;
+    }
 }
 
 @media screen and (max-width: 760px) {
     .header {
         padding: 18px 14px;
+    }
+    .header_auth {
+        justify-content: center;
+        padding-top: 56px;
+        padding-bottom: 0;
     }
 }

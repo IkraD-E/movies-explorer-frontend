@@ -3,7 +3,7 @@ import "./Main.css"
 
 import Footer from "../Footer/Footer";
 import AboutProject from "../AboutProject/AboutProject";
-import MainSection from "../MainSection/MainSection";
+import LandingSection from "../LandingSection/LandingSection";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
@@ -15,16 +15,16 @@ function Main({children}) {
         {children}
         <main className="main">
             <Promo/>
-          <MainSection headerText={"О проекте"} sectionName={"about"}>
+          <LandingSection headerText={"О проекте"} sectionName={"about"}>
             <AboutProject/>
-          </MainSection>
-          <MainSection headerText={"Технологии"} sectionName={"techs"}>
+          </LandingSection>
+          <LandingSection headerText={"Технологии"} sectionName={"techs"}>
             <Techs/>
-          </MainSection>
-          <MainSection headerText={"Студент"} sectionName={"student"}>
+          </LandingSection>
+          <LandingSection headerText={"Студент"} sectionName={"student"}>
             <AboutMe/>
             <Portfolio/>
-          </MainSection>
+          </LandingSection>
         </main>
         <Footer/>
       </>
