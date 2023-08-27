@@ -43,17 +43,19 @@ function Search() {
               className="search__submit"
               type="submit"
             >
-              <img className="search__image" src={searchImageWhite} alt="Найти"/>
+              <img className="search__image-submit" src={searchImageWhite} alt="Найти"/>
             </button>
           </div>
-          <button
-            className={`search__tumb ${isActive ? "search__tumb_active" : ""}`}
-            type="button"
-            onClick={tugleisTumbActive}
-          >
-          </button>
         </form>
-        <p className="search__text">Короткометражки</p>
+          <div className="search__filter">
+            <button
+              className={`search__tumb ${isActive ? "search__tumb_active" : ""}`}
+              type="button"
+              onClick={tugleisTumbActive}
+            >
+            </button>
+            <p className="search__text">Короткометражки</p>
+          </div>
       </div>
     </section>
   );

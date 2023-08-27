@@ -10,8 +10,8 @@
     box-sizing: border-box;
 
     font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 18px;
     display: flex;
     align-items: center;
     text-align: right;
@@ -37,8 +37,8 @@
     font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 18px;
     display: flex;
     align-items: center;
     text-align: right;
@@ -60,10 +60,10 @@
     justify-content: space-between;
     text-decoration: none;
 
-    border: #AAAAAA solid 2px;
+    border: 2px solid rgba(170, 170, 170, 0.2);
     border-radius: 50px;
     box-sizing: border-box;
-    padding: 9px 12px;
+    padding: 7px 12px;
     margin: 0 0 0 50px;
 }
 
