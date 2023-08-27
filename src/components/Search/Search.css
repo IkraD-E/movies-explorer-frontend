@@ -1,5 +1,4 @@
 .search {
-    max-width: 1280px;
     width: 100%;
 
     display: flex;
@@ -45,7 +44,7 @@
     width: 100%;
     min-height: 22px;
     margin: 0;
-    padding: 0 10px;
+    padding: 0 0 0 10px;
 
     display: flex;
     flex-direction: row;
@@ -55,8 +54,9 @@
 
 .search__input {
     font-weight: 400;
-    font-size: 13px;
-    color: #000;
+    font-size: 18px;
+    line-height: 20px;
+    color: #A0A0A0;
 
     max-width: 740px;
     width: 100%;
@@ -148,4 +148,17 @@
     line-height: 18px;
 
     color: #000000;
+}
+
+@media screen and (max-width: 1024px) {
+    .search {
+        padding: 80px 30px 120px;
+    }
+    .search__container {
+        max-width: 708px;
+        padding: 19px;
+    }
+    .search__text {
+        margin-left: 15px;
+    }
 }

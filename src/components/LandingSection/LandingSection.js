@@ -4,7 +4,7 @@ import "./LandingSection.css"
 
 function LandingSection({ children, headerText, sectionName }) {
     return (
-      <section className={`section ${sectionName}`} id="about">
+      <section className={`section ${sectionName}`} id={`${sectionName}`}>
         <div className="section__container-header">
           <h2 className="section__header">
             {headerText}

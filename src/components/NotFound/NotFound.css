@@ -57,3 +57,20 @@
 .not-found__link:hover {
     opacity: 0.85;
 }
+
+@media screen and (max-width: 720px) {
+    .not-found__header {
+        margin-top: 329px;
+        
+        font-size: 80px;
+        min-height: 97px;
+    }
+    .not-found__text {
+        margin-top: 10px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .not-found__link {
+        margin-top: 284px;
+    }
+}

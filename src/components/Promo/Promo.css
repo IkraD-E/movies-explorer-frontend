@@ -33,11 +33,12 @@
     opacity: 50%;
 }
 
-.promo__btn {
+.promo__link {
     margin: 146px 0 0;
     padding: 10px 10px;
     max-width: 129px;
     width: 100%;
+    display: block;
 
     box-sizing: border-box;
     border: 1px solid #000;
@@ -47,6 +48,9 @@
     font-size: 12px;
     font-weight: 500;
     line-height: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
 }
 
 .promo__picture {
@@ -80,7 +84,7 @@
 
         margin-top: 22px;
     }
-    .promo__btn {
+    .promo__link {
         margin-top: 92px;
     }
 }
@@ -102,7 +106,7 @@
         max-width: 260px;
         margin-top: 24px;
     }
-    .promo__btn {
+    .promo__link {
         margin-top: 80px;
     }
 }

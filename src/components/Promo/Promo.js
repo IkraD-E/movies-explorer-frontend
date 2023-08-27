@@ -15,9 +15,9 @@ function Promo() {
           <p className="promo__text">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <button className="promo__btn" type="button">
+          <a className="promo__link" href="#about">
             Узнать больше
-          </button>
+          </a>
         </div>
         <img className="promo__picture" src={promoImage} alt="Логотип"/>
       </div>

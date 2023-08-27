@@ -21,10 +21,6 @@
 }
 
 .portfolio-list__element {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
     padding: 20px 0;
     box-sizing: border-box;
 }
@@ -32,6 +28,15 @@
 .portfolio-list__element:nth-of-type(2n) {
     border-top: #E8E8E8 solid 1px;
     border-bottom: #E8E8E8 solid 1px;
+}
+
+.portfolio-list__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #000;
+    text-decoration: none;
 }
 
 .portfolio-list__title {
