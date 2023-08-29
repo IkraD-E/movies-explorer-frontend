@@ -20,7 +20,7 @@ function Profile({onSubmit, children}) {
     <>
       {children}
       <section className="profile">
-          <h1 className="profile__header">Привет, Виталий!</h1>
+          <h1 className="profile__header">Привет, IkraD!</h1>
           <form 
             className="profile__form"
             onSubmit={handleSubmit}

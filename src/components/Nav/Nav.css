@@ -78,14 +78,14 @@
     color: #000000;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
     .nav {
         display: none;
     }
 }
 
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 400px) {
     .nav__link {
         font-size: 10px;
     }

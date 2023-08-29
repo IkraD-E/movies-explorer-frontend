@@ -4,7 +4,7 @@ import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import "./AuthForm.css"
 
-function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, linkText, link, children}) {
+function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link, children}) {
   const {
     values,
     handleChange,
@@ -12,10 +12,6 @@ function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, link
     isValid,
   } = useFormAndValidation();
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    onSubmit(values);
-  }
 
   return (
     <>
@@ -25,7 +21,6 @@ function AuthForm({onSubmit, isRegistration, formName, btnText, afterWords, link
           <h1 className="auth__header">{formName}</h1>
           <form 
             className="auth__form"
-            onSubmit={handleSubmit}
           >
             <div className="auth__set">
               {isRegistration 

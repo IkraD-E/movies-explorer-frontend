@@ -22,83 +22,11 @@ import Profile from "../Profile/Profile";
 function App() {
   const [currentUser, setUserData] = React.useState({});
   const [movieList, setMovies] = React.useState(cardList);
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const navigate = useNavigate();
 
-  const [userEmail, setUserEmail] = React.useState("");
-  function handleSetUserEmail(email) {
-    setUserEmail(email);
+  const [navTabOpened, setNavTab] = React.useState(false);
+  function tuggleClickNavTab() {
+    setNavTab(!navTabOpened);
   }
-
-  const [serverCallbackStatus, setServerCallbackStatus] = React.useState(false);
-  function handleSetServerCallbackStatus(res) {
-    setServerCallbackStatus(res.ok);
-  }
-
-  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
-  function handleOpenInfoTooltipPopup() {
-    setIsInfoTooltipPopupOpen(true);
-  }
-
-  function handleTokenCheck() {
-    auth.checkToken()
-        .then(res => res.json())
-        .then(res => {
-          if (res) {
-            setLoggedIn(true);
-            handleSetUserEmail(res.email);
-            navigate("/", {replace: true});
-          }
-        })
-        .catch(err => console.log(`Ошибка проверки токена: ${err}`));
-  }
-
-  
-  function handleRegisterSubmit(email, password) {
-    auth.addNewUserToServer(email, password)
-      .then((res) =>{
-        handleSetServerCallbackStatus(res);
-        handleOpenInfoTooltipPopup();
-      })
-      .catch(err => {
-        handleSetServerCallbackStatus(err);
-        handleOpenInfoTooltipPopup();
-        console.log(`Ошибка добавления нового пользователя на сервер: ${err.status}`);
-      });
-  }
-
-  function handleLogInSubmit(email, password) {
-    auth.handleUserAuthorization(email, password)
-      .then((res => res.json()))
-      .then((data) =>{
-        if (data){
-          setLoggedIn(true);
-          navigate("/", {replace: true});
-          handleSetUserEmail(email);
-          return data;
-        }
-      })
-      .catch(err => {
-        handleSetServerCallbackStatus(err);
-        handleOpenInfoTooltipPopup();
-        console.log(`Ошибка входа пользователя: ${err}`);
-      });
-  }
-
-  function handleSignOut() {
-    auth.logout();
-    setLoggedIn(false);
-    navigate('/signin');
-  }
-
-  React.useEffect(() => {
-    loggedIn && Promise.all([api.getUserDataFromServer(), api.getMoviesFromServer()])
-      .then(([userData, movies]) => {
-          setUserData(userData);
-          setMovies(movies.reverse());
-    })
-      .catch(err => console.log(err));
-  }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -109,7 +37,11 @@ function App() {
               path="/"
               element={
                 <Main>
-                  <Header/>
+                  <Header
+                    navTabOpen={navTabOpened}
+                    tuggleClickNavTab={tuggleClickNavTab}
+                  >
+                  </Header>
                 </Main>
               }
             />
@@ -117,7 +49,6 @@ function App() {
               path="/signin"
               element={
                 <AuthForm 
-                  onSubmit={handleLogInSubmit} 
                   formName="Рады видеть!" 
                   btnText="Войти" 
                   afterWords="Ещё не зарегистрированы?&nbsp;"
@@ -132,7 +63,6 @@ function App() {
               path="/signup"
               element={
                 <AuthForm 
-                  onSubmit={handleRegisterSubmit} 
                   isRegistration={true}
                   formName="Добро пожаловать!" 
                   btnText="Зарегистрироваться"
@@ -148,8 +78,13 @@ function App() {
               path="/movies"
               element={
                 <Movies
-                  movieList={movieList}>
-                  <Header/>
+                  movieList={movieList}
+                >
+                  <Header
+                    navTabOpen={navTabOpened}
+                    tuggleClickNavTab={tuggleClickNavTab}
+                  >
+                  </Header>
                 </Movies>
               }
             />
@@ -158,7 +93,11 @@ function App() {
               element={
                 <SavedMovies
                   movieList={movieList}>
-                  <Header/>
+                  <Header
+                    navTabOpen={navTabOpened}
+                    tuggleClickNavTab={tuggleClickNavTab}
+                  >
+                  </Header>
                 </SavedMovies>
               }
             />
@@ -166,7 +105,11 @@ function App() {
               path="/profile"
               element={
                 <Profile>
-                  <Header/>
+                <Header
+                  navTabOpen={navTabOpened}
+                  tuggleClickNavTab={tuggleClickNavTab}
+                >
+                </Header>
                 </Profile>
               }
             ></Route>

@@ -7,8 +7,8 @@
     align-content: center;
     align-items: center;
 
-    padding: 70px 0;
-    max-width: 1140px;
+    padding: 70px;
+    max-width: 1280px;
     margin: 0;
     box-sizing: border-box;
 
@@ -173,7 +173,19 @@
 
 @media screen and (max-width: 1024px) {
     .search {
-        padding: 80px 0 109px;
+        max-width: 1024px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .search {
+        padding: 70px 35px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .search {
+        padding: 80px 30px 109px;
         max-width: 708px;
     }
     .search__container {
@@ -194,10 +206,10 @@
     }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 450px) {
     .search {
         padding-bottom: 45px;
-        max-width: 300px;
+        max-width: 4500px;
     }
     .search__container {
         background-color: #FAFAFA;
@@ -206,10 +218,9 @@
     }
     .search__form {
         background-color: #F4F4F4;
-        max-width: 300px;
         margin: 0;
         padding: 16px 19px;
-
+        max-width: 450px;
         border-radius: 9px;
     }
     .search__input {
@@ -231,5 +242,14 @@
     .search__text {
         font-size: 11px;
         line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .search {
+        max-width: 300px;
+    }
+    .search__form {
+        max-width: 300px;
     }
 }

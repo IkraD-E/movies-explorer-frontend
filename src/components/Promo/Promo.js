@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import promoImage from "../../images/promo-logo.svg";
 
@@ -15,9 +16,9 @@ function Promo() {
           <p className="promo__text">
             Листайте ниже, чтобы узнать больше про этот проект и его создателя.
           </p>
-          <a className="promo__link" href="#about">
+          <Link className="promo__link" to={"/signup"}>
             Узнать больше
-          </a>
+          </Link>
         </div>
         <img className="promo__picture" src={promoImage} alt="Логотип"/>
       </div>
