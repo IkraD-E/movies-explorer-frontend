@@ -6,8 +6,9 @@ import Navigation from "../Nav/Nav";
 import logo from "../../images/header__logo.svg";
 
 import "./Header.css";
+import NavMini from "../NavMini/NavMini";
 
-function Header({navTabOpened, tuggleClickNavTab, handleCloseNavTab}) {
+function Header({navTabOpen, tuggleClickNavTab, handleCloseNavTab}) {
   const path = useLocation().pathname;
   return (
     (path === "/signup" || path === "/signin") ?
@@ -20,9 +21,10 @@ function Header({navTabOpened, tuggleClickNavTab, handleCloseNavTab}) {
         <Link className="header__logo-container" to="/">
           <img className="header__logo" src={logo} alt="Логотип"/>
         </Link>
+        <NavMini tuggleClickNavTab={tuggleClickNavTab} />
         <Navigation 
           path={path}
-          navTabOpened={navTabOpened}
+          navTabOpen={navTabOpen}
           tuggleClickNavTab={tuggleClickNavTab}
         />
       </header>) 

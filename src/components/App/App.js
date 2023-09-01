@@ -23,9 +23,9 @@ function App() {
   const [currentUser, setUserData] = React.useState({});
   const [movieList, setMovies] = React.useState(cardList);
 
-  const [navTabOpened, setNavTab] = React.useState(false);
+  const [navTabOpen, setNavTab] = React.useState(false);
   function tuggleClickNavTab() {
-    setNavTab(!navTabOpened);
+    setNavTab(!navTabOpen);
   }
 
   return (
@@ -38,7 +38,7 @@ function App() {
               element={
                 <Main>
                   <Header
-                    navTabOpened={navTabOpened}
+                    navTabOpen={navTabOpen}
                     tuggleClickNavTab={tuggleClickNavTab}
                   >
                   </Header>
@@ -81,7 +81,7 @@ function App() {
                   movieList={movieList}
                 >
                   <Header
-                    navTabOpened={navTabOpened}
+                    navTabOpen={navTabOpen}
                     tuggleClickNavTab={tuggleClickNavTab}
                   >
                   </Header>
@@ -94,7 +94,7 @@ function App() {
                 <SavedMovies
                   movieList={movieList}>
                   <Header
-                    navTabOpened={navTabOpened}
+                    navTabOpen={navTabOpen}
                     tuggleClickNavTab={tuggleClickNavTab}
                   >
                   </Header>
@@ -106,7 +106,7 @@ function App() {
               element={
                 <Profile>
                 <Header
-                  navTabOpened={navTabOpened}
+                  navTabOpen={navTabOpen}
                   tuggleClickNavTab={tuggleClickNavTab}
                 >
                 </Header>
