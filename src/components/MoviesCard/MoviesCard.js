@@ -50,7 +50,7 @@ export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
                 src={card.image}
                 alt={card.nameRU}
             />
-            {isOwn && <button className='card_delete_button' onClick={handleCardDeleteClick} />}
+            {isOwn && <button className='card_delete_button' onClick={handleCardDeleteClick} type="button"/>}
         </li>
     )
 }

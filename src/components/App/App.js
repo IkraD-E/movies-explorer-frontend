@@ -38,7 +38,7 @@ function App() {
               element={
                 <Main>
                   <Header
-                    navTabOpen={navTabOpened}
+                    navTabOpened={navTabOpened}
                     tuggleClickNavTab={tuggleClickNavTab}
                   >
                   </Header>
@@ -81,7 +81,7 @@ function App() {
                   movieList={movieList}
                 >
                   <Header
-                    navTabOpen={navTabOpened}
+                    navTabOpened={navTabOpened}
                     tuggleClickNavTab={tuggleClickNavTab}
                   >
                   </Header>
@@ -94,7 +94,7 @@ function App() {
                 <SavedMovies
                   movieList={movieList}>
                   <Header
-                    navTabOpen={navTabOpened}
+                    navTabOpened={navTabOpened}
                     tuggleClickNavTab={tuggleClickNavTab}
                   >
                   </Header>
@@ -106,7 +106,7 @@ function App() {
               element={
                 <Profile>
                 <Header
-                  navTabOpen={navTabOpened}
+                  navTabOpened={navTabOpened}
                   tuggleClickNavTab={tuggleClickNavTab}
                 >
                 </Header>

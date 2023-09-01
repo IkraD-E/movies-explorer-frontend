@@ -55,10 +55,15 @@
 
     text-decoration: none;
     color: #000;
+    transition: opacity .8s ease-in-out;
+}
+
+.footer__link:hover {
+    opacity: .7;
 }
 
 .footer__link:first-of-type {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 @media screen and (max-width: 1024px) {

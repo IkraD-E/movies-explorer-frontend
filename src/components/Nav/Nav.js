@@ -2,10 +2,12 @@ import React from "react";
 import { NavLink } from 'react-router-dom';
 
 import navLinkImage from "../../images/nav__link-image.svg"
+import NavTab from "../NavTab/NavTab";
+import NavMini from "../NavMini/NavMini";
 
 import "./Nav.css"
 
-function Nav({ path }) {
+function Nav({ path, navTabOpened, tuggleClickNavTab, handleCloseNavTab }) {
 
   return (
     path === "/" ? (<nav className="nav">
@@ -29,6 +31,9 @@ function Nav({ path }) {
             Аккаунт
           </p>
         </NavLink>
+        
+        <NavMini tuggleClickNavTab={tuggleClickNavTab} />
+        <NavTab navTabOpen={navTabOpened} tuggleClickNavTab={tuggleClickNavTab}/>
       </nav>
     )
   );

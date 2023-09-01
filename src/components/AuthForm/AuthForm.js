@@ -26,7 +26,7 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
               {isRegistration 
                 &&
                 <>
-                  <label for="name" className="auth__label">Имя</label>
+                  <label htmlFor="name" className="auth__label">Имя</label>
                   <input 
                   required 
                   minLength="2" 
@@ -42,7 +42,7 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
                   <span className={`auth__error name-error ${errors.name && "auth__error_active"}`}>{errors.name || ""}</span>
                 </>
               }
-              <label for="email" className="auth__label">E-mail</label>
+              <label htmlFor="email" className="auth__label">E-mail</label>
               <input 
                 required 
                 minLength="2" 
@@ -56,7 +56,7 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
                 onChange={handleChange}
               />
               <span className={`auth__error email-error ${errors.email && "auth__error_active"}`}>{errors.email || ""}</span>
-              <label for="password" className="auth__label">Пароль</label>
+              <label htmlFor="password" className="auth__label">Пароль</label>
               <input 
                 required 
                 minLength="8" 

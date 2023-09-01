@@ -1,27 +1,31 @@
 import React from "react";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import Navigation from "../Nav/Nav";
 
 import logo from "../../images/header__logo.svg";
 
 import "./Header.css";
-import NavTab from "../NavTab/NavTab";
-import NavMini from "../NavMini/NavMini";
 
-function Header({navTabOpen, tuggleClickNavTab, handleCloseNavTab}) {
+function Header({navTabOpened, tuggleClickNavTab, handleCloseNavTab}) {
   const path = useLocation().pathname;
   return (
     (path === "/signup" || path === "/signin") ?
-    (<div className="header header_auth">
-      <img className="header__logo" src={logo} alt="Логотип"/>
-    </div>)  : (
-      <div className={`${path === "/" ? "header" : "header header_white"}`}>
+    (<header className="header header_auth">
+      <Link className="header__logo-container" to="/">
         <img className="header__logo" src={logo} alt="Логотип"/>
-        <Navigation path={path}/>
-        <NavMini tuggleClickNavTab={tuggleClickNavTab} />
-        <NavTab navTabOpen={navTabOpen} tuggleClickNavTab={tuggleClickNavTab}/>
-      </div>) 
+      </Link>
+    </header>) : (
+      <header className={`${path === "/" ? "header" : "header header_white"}`}>
+        <Link className="header__logo-container" to="/">
+          <img className="header__logo" src={logo} alt="Логотип"/>
+        </Link>
+        <Navigation 
+          path={path}
+          navTabOpened={navTabOpened}
+          tuggleClickNavTab={tuggleClickNavTab}
+        />
+      </header>) 
   )
 }
 export default Header;

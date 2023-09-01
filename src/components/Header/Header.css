@@ -18,23 +18,20 @@
 
 .header_auth {
     margin: 0 auto;
-    padding: 70px 0;
+    padding: 70px 0 0;
     background-color: #FAFAFA;
     max-width: 398px;
 }
 
-
-@media screen and (max-width: 1024px) {
-    .header {
-        padding: 18px 70px;
-    }
+.header__logo {
+    cursor: pointer;
+    transition: opacity .8s ease-in-out;
 }
 
-@media screen and (max-width: 900px) {
-    .header {
-        padding: 18px 35px;
-    }
+.header__logo:hover {
+    opacity: .5;
 }
+
 
 @media screen and (max-width: 768px) {
     .header {
@@ -46,7 +43,7 @@
     }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 720px) {
     .header {
         padding: 18px 14px;
     }

@@ -8,7 +8,7 @@ function AboutMe() {
     <div className="about-me__main">
       <div className="about-me__text-container">
         <div className="about-me__text-part">
-          <h2 className="about-me__header">Ikra:D</h2>
+          <h3 className="about-me__header">Ikra:D</h3>
           <p className="about-me__sub-text">
             Фронтенд-разработчик, 21 год
           </p>
@@ -17,7 +17,7 @@ function AboutMe() {
             а теперь ещё Фронтенд-разработчик. 
           </p>
         </div>
-        <a href="https://github.com/IkraD-E" type="button" className="link about-me__link">
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/IkraD-E" type="button" className="link about-me__link">
           Github
         </a>
       </div>

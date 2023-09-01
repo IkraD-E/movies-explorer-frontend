@@ -1,7 +1,8 @@
 .tech__header {
+    font-weight: 400;
     font-size: 50px;
     line-height: 58px;
-    font-weight: 400;
+    letter-spacing: -0.04em;
 
     text-align: center;
 
@@ -10,9 +11,11 @@
 }
 
 .tech__text {
-    font-size:  14px;
-    line-height: 20px;
     font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.04em;
+
     text-align: center;
 
     margin: 26px auto 0;
@@ -52,8 +55,10 @@
 }
 
 .texh-list__text {
-    font-size: 14px;
     font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.04em;
 
     padding: 21px 25px;
 

@@ -6,7 +6,7 @@ function More({ path }) {
 
   return (
     <div className="more">
-      <button className="more__button">
+      <button className="more__button" type="button">
         Ещё
       </button>
     </div>

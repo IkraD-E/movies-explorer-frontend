@@ -51,6 +51,12 @@
     text-align: center;
     text-decoration: none;
     color: #000;
+    transition: opacity .8s ease-in-out, box-shadow .8s ease-in-out;
+}
+
+.promo__link:hover {
+    opacity: .5;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 .promo__picture {

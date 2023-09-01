@@ -12,8 +12,11 @@
 
 .section__header {
     margin: 0;
-    font-size: 22px;
+    
     font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
 }
 
 .section_promo {

@@ -38,7 +38,7 @@
     max-width: 15px;
     width: 100%;
     max-height: 15px;
-    margin: 7px;
+    margin: 7px 7px 7px 0;
 
     object-fit: cover;
 }
@@ -120,7 +120,7 @@
 
 .search__filter {
     display: flex;
-    min-width: 188px;
+    min-width: 198px;
 }
 
 .search__tumb {
@@ -185,15 +185,19 @@
 
 @media screen and (max-width: 768px) {
     .search {
-        padding: 80px 30px 109px;
+        padding: 80px 0 109px;
         max-width: 708px;
     }
     .search__container {
         max-width: 708px;
         padding: 16px;
+        padding-right: 20px;
     }
     .search__text {
         margin-left: 15px;
+    }
+    .search__filter {
+        min-width: 186px;
     }
     .search__tumb {
         margin-left: 19px;
@@ -202,7 +206,11 @@
         max-width: 100px;
     }
     .search__submit {
-        margin-right: 25px;
+        margin-right: 19px;    
+    }
+    .search__image {
+        max-width: 15px;
+        margin: 3px 7px 7px 11px;
     }
 }
 

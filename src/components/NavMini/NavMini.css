@@ -10,12 +10,12 @@
     border: none;
 
     cursor: pointer;
-    transition: opacity ease-in-out .5s;
+    transition: opacity .8s ease-in-out, box-shadow .8s ease-in-out;
 }
 
-.nav-mini:hover {
+.nav-mini__btn:hover {
     opacity: .5;
-
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 @media screen and (max-width: 768px) {

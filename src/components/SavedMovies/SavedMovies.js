@@ -5,7 +5,7 @@ import Search from "../Search/Search";
 
 function SavedMovies({onCardDeleteClick, onCardSaveClick, children, movieList}) {
   return (
-    <>
+    <main className="saved-movies">
       {children}
       <Search/>
       <MoviesCardList
@@ -14,7 +14,7 @@ function SavedMovies({onCardDeleteClick, onCardSaveClick, children, movieList}) 
         onCardDeleteClick={onCardDeleteClick}
       />
       <Footer/>
-    </>
+    </main>
   );
 }
 

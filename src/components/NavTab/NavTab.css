@@ -27,17 +27,16 @@
     visibility: hidden;
     z-index: 2;
 
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
 
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background: rgba(0, 0, 0, 0);
     transition: background ease-in-out 1s;
     overflow: hidden;
 }
-
 
 .nav-tab__underlayer_true {
     visibility: visible;
@@ -47,6 +46,12 @@
 .nav-tab_true {
     visibility: visible;
     right: 0px;
+}
+
+.nav-tab__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .nav-tab__close-btn {
@@ -62,7 +67,12 @@
     cursor: pointer;
     align-self: end;
 
-    transition: opacity ease-in-out .5s;
+    transition: opacity .8s ease-in-out, box-shadow .8s ease-in-out;
+}
+
+.nav-tab__close-btn:hover {
+    opacity: .5;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 .nav-tab__link-container {
@@ -92,7 +102,14 @@
     border: none;
 
     cursor: pointer;
+    transition: opacity .8s ease-in-out, box-shadow .8s ease-in-out;
 }
+
+.nav-tab__link:hover {
+    opacity: .5;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
 
 .nav-tab__link:first-of-type {
     margin-top: 106px;
@@ -109,7 +126,6 @@
     
     box-sizing: border-box;
 
-    font-family: 'Inter';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -140,6 +156,12 @@
     box-sizing: border-box;
     padding: 7px 12px;
     margin: 0;
+    transition: opacity .8s ease-in-out, box-shadow .8s ease-in-out;
+}
+
+.nav-tab__container:hover {
+    opacity: .8;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 .nav-tab__link-text {
