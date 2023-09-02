@@ -13,15 +13,21 @@ function NavTab({navTabOpen, tuggleClickNavTab}) {
         <div className="nav-tab__link-container">
           <button className="nav-tab__close-btn" type="button" onClick={tuggleClickNavTab}/>
           <ul className="nav-tab__list">
-            <NavLink to="/" className='nav-tab__link' onClick={tuggleClickNavTab}>
-              Главная
-            </NavLink>
-            <NavLink to="/movies" className='nav-tab__link nav-tab__link_underline' onClick={tuggleClickNavTab}>
-              Фильмы
-            </NavLink>
-            <NavLink to="/saved-movies" className='nav-tab__link' onClick={tuggleClickNavTab}>
-              Сохранённые фильмы
-            </NavLink>
+            <li className="nav-tab__element">
+              <NavLink to="/" className='nav-tab__link' onClick={tuggleClickNavTab}>
+                Главная
+              </NavLink>
+            </li>
+            <li className="nav-tab__element">
+              <NavLink to="/movies" className='nav-tab__link nav-tab__link_underline' onClick={tuggleClickNavTab}>
+                Фильмы
+              </NavLink>
+            </li>
+            <li className="nav-tab__element">
+              <NavLink to="/saved-movies" className='nav-tab__link' onClick={tuggleClickNavTab}>
+                Сохранённые фильмы
+              </NavLink>
+            </li>
           </ul>
         </div>
         {console.log(navTabOpen)}

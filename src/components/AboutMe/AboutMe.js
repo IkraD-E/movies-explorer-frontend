@@ -17,7 +17,7 @@ function AboutMe() {
             а теперь ещё Фронтенд-разработчик. 
           </p>
         </div>
-        <a target="_blank" rel="noopener noreferrer" href="https://github.com/IkraD-E" type="button" className="link about-me__link">
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/IkraD-E" className="about-me__link">
           Github
         </a>
       </div>

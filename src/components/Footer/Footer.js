@@ -9,8 +9,24 @@ export default function Footer() {
           <div className="footer__container">
             <p className="footer__copyright">© {thisYear}</p>
             <ul className="footer__links">
-              <a target="_blank" rel="noopener noreferrer" href="https://practicum.yandex.ru/" className="footer__link">Яндекс.Практикум</a>
-              <a target="_blank" rel="noopener noreferrer" href="https://github.com/IkraD-E" className="footer__link">Github</a>
+              <li className="nav-tab__element">
+                <a 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  href="https://practicum.yandex.ru/" 
+                  className="footer__link">
+                    Яндекс.Практикум
+                </a>
+              </li>
+              <li className="nav-tab__element">
+                <a 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  href="https://github.com/IkraD-E" 
+                  className="footer__link">
+                    Github
+                </a>
+              </li>
             </ul>
           </div>
         </footer>
