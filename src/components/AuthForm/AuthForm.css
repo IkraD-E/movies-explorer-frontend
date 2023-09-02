@@ -79,13 +79,18 @@
     display: block;
     background: #F4F4F4;
     border-radius: 8px;
+    outline: solid 1px transparent;
 
-    transition: opacity .5s ease-in-out, color 1s ease-in-out, border-color .5s ease-in-out;
+    transition: 
+        opacity .5s ease-in-out, color 1s ease-in-out, 
+        border-color .5s ease-in-out,
+        outline .5s ease-in-out,;
 }
 
 .auth__input:focus {
     border-color: #000;
     opacity: 0.55;
+    outline: solid 1px #000;
 }
 
 .auth__input_invalid {
@@ -122,8 +127,6 @@
     background: #3456F3;
     border: none;
     border-radius: 2px;
-
-    transition: opacity 1.5s ease-in-out, color 1.5s ease-in-out;
 }
 
 .auth__submit:hover {
@@ -167,6 +170,7 @@
     
     color: #3456F3;
     text-decoration: none;
+    outline: solid 4px transparent;
     transition: opacity .8s ease-in-out;
 }
 

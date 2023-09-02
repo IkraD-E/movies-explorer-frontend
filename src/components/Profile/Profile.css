@@ -33,10 +33,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
+
+    outline: solid 1px transparent;
+
+    transition: 
+        opacity 1.5s ease-in-out, 
+        color 1.5s ease-in-out,
+        outline .5s ease-in-out;
 }
 
 .profile__input-container:first-of-type {
     border-bottom: #E8E8E8 solid 1px;
+}
+
+.profile__input-container:focus-within{
+    outline: solid 1px #000;
+}
+
+.profile__input-box {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .profile__label {
@@ -64,8 +82,21 @@
 
     background-color: transparent;
     color: #000000;
+    outline: none;
 }
 
+.profile__error {
+    font-weight: 400;
+    font-size: 10px;
+    color: #EE3465;
+    min-height: 12px;
+    display: none;
+    align-items: center;
+}
+
+.profile__error_active {
+    display: flex;
+}
 .profile__btn {
     margin: 204px 0 0;
     cursor: pointer;
