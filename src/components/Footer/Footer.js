@@ -9,7 +9,7 @@ export default function Footer() {
           <div className="footer__container">
             <p className="footer__copyright">© {thisYear}</p>
             <ul className="footer__links">
-              <li className="nav-tab__element">
+              <li className="footer__links-element">
                 <a 
                   target="_blank" 
                   rel="noopener noreferrer" 
@@ -18,7 +18,7 @@ export default function Footer() {
                     Яндекс.Практикум
                 </a>
               </li>
-              <li className="nav-tab__element">
+              <li className="footer__links-element">
                 <a 
                   target="_blank" 
                   rel="noopener noreferrer" 

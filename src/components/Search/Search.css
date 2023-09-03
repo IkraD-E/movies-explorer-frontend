@@ -69,6 +69,14 @@
     width: 100%;
     display: flex;
     background-color: #f4f4f4;
+
+    border-radius: 8px;
+    outline: solid 1px transparent;
+
+    transition: 
+        opacity .5s ease-in-out, color 1s ease-in-out, 
+        border-color .5s ease-in-out,
+        outline .5s ease-in-out,;
 }
 
 .search__input {
@@ -84,8 +92,15 @@
     border: none;
     background: #F4F4F4;
     border-radius: 8px;
+    outline: none;
 
     transition: opacity .5s ease-in-out, color 1s ease-in-out, border-color .5s ease-in-out;
+}
+
+.search__form-container:focus-within {
+    border-color: #000;
+    opacity: 0.55;
+    outline: solid 1px #000;
 }
 
 .search__btn-container {
@@ -192,7 +207,7 @@
 @media screen and (max-width: 768px) {
     .search {
         padding: 80px 10px 109px;
-        max-width: 708px;
+        max-width: 728px;
     }
     .search__container {
         max-width: 708px;
@@ -267,7 +282,7 @@
 
 @media screen and (max-width: 320px) {
     .search {
-        max-width: 300px;
+        max-width: 320px;
     }
     .search__form {
         max-width: 300px;

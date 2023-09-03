@@ -8,6 +8,11 @@
     flex-direction: column;
 }
 
+.profile__section {
+    display: flex;
+    flex-direction: column;
+}
+
 .profile__header {
     font-style: normal;
     font-weight: 500;

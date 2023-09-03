@@ -16,7 +16,7 @@
     transition: all  1s ease-in-out;
 
     margin: 0;
-    padding: 22px 22px 90px;
+    padding: 26px 26px 90px;
     box-sizing: border-box;
     z-index: 3;
 }
@@ -114,8 +114,8 @@
 }
 
 
-.nav-tab__link:first-of-type {
-    margin-top: 106px;
+.nav-tab__element:first-of-type {
+    margin-top: 83px;
 }
 
 .nav-tab__link_underline {
@@ -180,12 +180,9 @@
 
 @media screen and (max-width: 425px) {
     .nav-tab {
-        padding: 14px 14px 46px;
+        padding: 17px 17px 46px;
     }
     .nav-tab__link{
         margin-top: 24px;
-    }
-    .nav-tab__link:first-of-type {
-        margin-top: 100px;
     }
 }

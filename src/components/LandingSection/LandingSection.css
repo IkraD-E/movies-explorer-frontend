@@ -25,10 +25,14 @@
 
 .about {
     background-color: #FAFAFA;
+
+    max-height: 641px;
 }
 
 .techs {
     background-color: #FAFAFA;
+
+    max-height: 651px;
 }
 
 .student {

@@ -5,19 +5,25 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Search from "../Search/Search";
 
 function Movies({onCardDeleteClick, onCardSaveClick, children, movieList}) {
+  const movieCount = 3;
+  const notNeedMore = movieList.length < movieCount;
+
   
   return (
-    <main className="movies-list">
+    <>
       {children}
-      <Search/>
-        <MoviesCardList
-          movieList={movieList} 
-          onCardSaveClick={onCardSaveClick}
-          onCardDeleteClick={onCardDeleteClick}
-        />
-        <More/>
-      <Footer/>
-    </main>
+      <main className="movies-list">
+        <Search/>
+          <MoviesCardList
+            movieList={movieList}
+            movieCount={movieCount}
+            onCardSaveClick={onCardSaveClick}
+            onCardDeleteClick={onCardDeleteClick}
+          />
+          <More notNeedMore={notNeedMore}/>
+        <Footer/>
+      </main>
+    </>
     );
 }
 

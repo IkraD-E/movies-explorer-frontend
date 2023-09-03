@@ -94,6 +94,7 @@
     .about-me__main {
         flex-direction: column-reverse;
         align-items: center;
+        padding-top: 60px;
     }
     .about-me__header {
         font-size: 30px;

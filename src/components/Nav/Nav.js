@@ -9,7 +9,7 @@ import "./Nav.css"
 function Nav({ path, navTabOpen, tuggleClickNavTab, handleCloseNavTab }) {
 
   return (
-    path === "/" ? (<nav className="nav">
+    path === "/" ? (<nav className="nav nav_main">
       <NavLink to="/signup" className='nav__link nav__link_bold'>
         Регистрация
       </NavLink>

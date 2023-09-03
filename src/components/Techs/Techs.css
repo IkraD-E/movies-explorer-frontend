@@ -97,7 +97,7 @@
         letter-spacing: -0.04em;
     }
     .tech-list {
-        padding: 50px 53px;
+        padding: 50px 53px 70px;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         justify-items: center;

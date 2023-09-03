@@ -4,9 +4,7 @@ import "./MoviesCardList.css"
 
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-export default function MoviesCardList({movieList, onMovieSaveClick, onMovieDeleteClick}) {
-    const movieCount = 5;
-
+export default function MoviesCardList({movieList, movieCount, onMovieSaveClick, onMovieDeleteClick}) {
     return (
         <section className="movies" aria-label="movies">
             {movieList ? 

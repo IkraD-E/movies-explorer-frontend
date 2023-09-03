@@ -8,6 +8,7 @@
     width: 100%;
     padding: 18px 70px;
     box-sizing: border-box;
+    max-height: 74px;
 
     background-color: #DDDEE3;
 }

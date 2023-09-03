@@ -21,7 +21,7 @@ function Header({navTabOpen, tuggleClickNavTab, handleCloseNavTab}) {
         <Link className="header__logo-container" to="/">
           <img className="header__logo" src={logo} alt="Логотип"/>
         </Link>
-        <NavMini tuggleClickNavTab={tuggleClickNavTab} />
+        {path === "/" ? "" : <NavMini tuggleClickNavTab={tuggleClickNavTab} />}
         <Navigation 
           path={path}
           navTabOpen={navTabOpen}
