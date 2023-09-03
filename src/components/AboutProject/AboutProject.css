@@ -1,0 +1,118 @@
+.about__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.about__element {
+    max-width: 550px;
+    width: 100%;
+}
+
+.about__header {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+
+    padding: 70px 0 0;
+    margin: 0;
+}
+
+.about__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+
+    padding: 26px 0 0;
+    margin: 0;
+    min-height: 37px;
+}
+
+.elapsed-time {
+    padding: 105px 0;
+    list-style-type: none;
+    display: grid;
+    margin: 0;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.elapsed-time__text {
+    margin: 0;
+    padding: 9px 0;
+}
+
+.elapsed-time__element_long {
+    grid-column: span 4;
+}
+
+.elapsed-time__element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    opacity: 50%;
+
+    min-height: 36px;
+}
+
+.elapsed-time__element:first-of-type {
+    background-color: #3456F3;
+    color: #FFFFFF;
+    opacity: 100%;
+}
+
+.elapsed-time__element:nth-of-type(2) {
+    opacity: 100%;
+    background-color: #F2F2F2;
+}
+
+@media screen and (max-width: 1024px) {
+    .about__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .about__element {
+        max-width: 320px;
+    }
+    .elapsed-time {
+        padding: 90px 0 76px;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .about__list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .about__header {
+        padding-top: 60px;
+        
+        font-size: 18px;
+        line-height: 22px;
+        letter-spacing: -0.04em;
+    }
+    .about__text {
+        padding-top: 16px;
+
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .elapsed-time {
+        padding: 60px 0;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .elapsed-time__text {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .elapsed-time__element_long {
+        grid-column: span 2;
+    }
+}

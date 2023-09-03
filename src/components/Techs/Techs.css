@@ -1,0 +1,119 @@
+.tech__header {
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+
+    text-align: center;
+
+    margin: 90px auto 0;
+    padding: 0;
+}
+
+.tech__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.04em;
+
+    text-align: center;
+
+    margin: 26px auto 0;
+    padding: 0;
+    max-width: 460px;
+    width: 100%;
+}
+
+.tech-list {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    
+    margin: 0;
+    padding: 100px 0;
+}
+
+.tech-list__element {
+    background-color: #E8E8E8;
+
+    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 90px;
+    width: 100%;
+    max-height: 60px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 10px 0 0;
+}
+
+.tech-list__element:last-of-type{
+    margin: 0;
+}
+
+.tech-list__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: -0.04em;
+
+    padding: 21px 25px;
+
+    color: #000;
+}
+
+@media screen and (max-width: 1024px) {
+    .tech__header {
+        font-size: 50px;
+        line-height: 58px;
+    }
+    .tech__text {
+        margin-top: 22px;
+
+        font-size: 12px;
+        line-height: 18px;
+    }
+    .tech-list {
+        padding: 83px 10px 90px;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .tech__header {
+        margin-top: 60px;
+
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.04em;
+    }
+    .tech__text {
+        margin-top: 24px;
+
+        font-size: 11px;
+        line-height: 16px;
+        letter-spacing: -0.04em;
+    }
+    .tech-list {
+        padding: 50px 53px 70px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        gap: 10px;
+    }
+    .tech-list__element {
+        margin: 0;
+
+        max-width: 84px;
+        max-height: 57px;
+    }
+    .tech-list__text {
+        margin: 0;
+
+        font-size: 12px;
+        line-height: 15px;
+        letter-spacing: -0.04em;
+    }
+}

@@ -1,27 +1,33 @@
 import React from "react";
-import landingImage from "../../images/landing-logo.svg";
+import "./Main.css"
 
+import Footer from "../Footer/Footer";
+import AboutProject from "../AboutProject/AboutProject";
+import LandingSection from "../LandingSection/LandingSection";
+import Techs from "../Techs/Techs";
+import AboutMe from "../AboutMe/AboutMe";
+import Portfolio from "../Portfolio/Portfolio";
+import Promo from "../Promo/Promo";
 
-function Main() {
+function Main({children}) {
     return (
-      <main className="content">
-        <section className="landing">
-          <div className="landing__main">
-            <div className="landing__info">
-              <h1 className="landing__header">
-              Учебный проект студента факультета Веб-разработки.  
-              </h1>
-              <p className="landing__text">
-                Листайте ниже, чтобы узнать больше про этот проект и его создателя.
-              </p>
-            </div>
-            <img className="landing__picture" src={landingImage} alt="Логотип"/>
-            <button className="landing__learn-more" type="button" onClick={""}>
-              Узнать больше
-            </button>
-          </div>
-        </section>
-      </main>
+      <>
+        {children}
+        <main className="main">
+            <Promo/>
+          <LandingSection headerText={"О проекте"} sectionName={"about"}>
+            <AboutProject/>
+          </LandingSection>
+          <LandingSection headerText={"Технологии"} sectionName={"techs"}>
+            <Techs/>
+          </LandingSection>
+          <LandingSection headerText={"Студент"} sectionName={"student"}>
+            <AboutMe/>
+            <Portfolio/>
+          </LandingSection>
+        </main>
+        <Footer/>
+      </>
     );
 }
 

@@ -1,0 +1,25 @@
+.nav-mini__btn {
+    display: none;
+    background-color: transparent;
+    background-image: url("../../images/nav-mini.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 40px;
+    height: 40px;
+    border: none;
+
+    cursor: pointer;
+    transition: opacity .8s ease-in-out, box-shadow .8s ease-in-out;
+}
+
+.nav-mini__btn:hover {
+    opacity: .5;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+
+@media screen and (max-width: 768px) {
+    .nav-mini__btn {
+        display: block;
+    }
+}
