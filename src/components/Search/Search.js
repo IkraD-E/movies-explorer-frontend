@@ -22,7 +22,7 @@ function Search() {
   } = useFormAndValidation();
 
   return (
-    <section className="search">
+    <section className="search" aria-label="search">
       <div className="search__container">
         <img className="search__image" src={searchImage} alt="Найти"/>
         <form className="search__form">

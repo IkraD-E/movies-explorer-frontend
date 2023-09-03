@@ -12,8 +12,8 @@ function SavedMovies({onCardDeleteClick, onCardSaveClick, children, movieList}) 
 
   return (
     <>
+      {children}
       <main className="saved-movies">
-        {children}
         <Search/>
         <MoviesCardList
           movieList={movieList} 
