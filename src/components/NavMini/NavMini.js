@@ -4,7 +4,9 @@ import "./NavMini.css"
 
 function NavMini({tuggleClickNavTab}) {
   return (
-    <button className="nav-mini__btn" onClick={tuggleClickNavTab} type="button"></button>
+    <div className="nav-mini">
+      <button className="nav-mini__btn" onClick={tuggleClickNavTab} type="button"></button>
+    </div>
   );
 }
 

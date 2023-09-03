@@ -22,6 +22,7 @@
     padding: 70px 0 0;
     background-color: #FAFAFA;
     max-width: 398px;
+    max-height: none;
 }
 
 .header__logo {

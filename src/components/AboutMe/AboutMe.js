@@ -5,7 +5,7 @@ import "./AboutMe.css"
 
 function AboutMe() {
   return (
-    <div className="about-me__main">
+    <div className="about-me">
       <div className="about-me__text-container">
         <div className="about-me__text-part">
           <h3 className="about-me__header">Ikra:D</h3>

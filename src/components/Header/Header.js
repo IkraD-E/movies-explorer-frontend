@@ -17,7 +17,7 @@ function Header({navTabOpen, tuggleClickNavTab, handleCloseNavTab}) {
         <img className="header__logo" src={logo} alt="Логотип"/>
       </Link>
     </header>) : (
-      <header className={`${path === "/" ? "header" : "header header_white"}`}>
+      <header className={`header ${path === "/" ? "" : "header_white"}`}>
         <Link className="header__logo-container" to="/">
           <img className="header__logo" src={logo} alt="Логотип"/>
         </Link>

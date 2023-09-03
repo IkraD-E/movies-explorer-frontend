@@ -6,8 +6,8 @@ import "./Portfolio.css"
 function Portfolio() {
     return (
     <>
-      <h2 className="portfolio-list__header">Портфолио</h2>
       <ul className="portfolio-list">
+        <h2 className="portfolio-list__header">Портфолио</h2>
         <li className="portfolio-list__element">
           <a target="_blank" rel="noopener noreferrer" className="portfolio-list__link" href="https://ikrad-e.github.io/how-to-learn/">
             <h3 className="portfolio-list__title">Статичный сайт</h3>

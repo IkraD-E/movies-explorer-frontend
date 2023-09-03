@@ -64,13 +64,13 @@ function Profile({onSubmit, children}) {
               <span className={`profile__error email-error ${errors.email && "profile__error_active"}`}>{errors.email || ""}</span>
               </div>
             <button 
-              className={`profile__btn ${isValid ? "" : "profile__submit_disabled"}`}
+              className={`profile__submit ${isValid ? "" : "profile__submit_disabled"}`}
               type="submit"
             >
               Редактировать
             </button>
           </form>
-            <Link className="profile__link_signout" to='/'>
+            <Link className="profile__link" to='/'>
               Выйти из аккаунта
             </Link>
         </section>

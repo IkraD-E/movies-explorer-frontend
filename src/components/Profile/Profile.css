@@ -102,7 +102,7 @@
 .profile__error_active {
     display: flex;
 }
-.profile__btn {
+.profile__submit {
     margin: 204px 0 0;
     cursor: pointer;
 
@@ -121,11 +121,11 @@
     transition: opacity .8s ease-in-out;
 }
 
-.profile__btn:hover {
+.profile__submit:hover {
     opacity: .5;
 }
 
-.profile__link_signout {
+.profile__link {
     margin: 16px 0 0;
 
     font-style: normal;
@@ -139,7 +139,7 @@
     transition: opacity .8s ease-in-out;
 }
 
-.profile__link_signout:hover {
+.profile__link:hover {
     opacity: .5;
 }
 
@@ -150,7 +150,7 @@
     .profile__form {
         margin-top: 80px;
     }
-    .profile__btn {
+    .profile__submit {
         margin-top: 194px;
     }
 }
@@ -161,12 +161,12 @@
         max-width: 400px;
         box-sizing: border-box;
     }
-    .profile__btn {
+    .profile__submit {
         margin-top: 365px;
         font-size: 12px;
         line-height: 15px;
     }
-    .profile__link_signout {
+    .profile__link {
         font-size: 12px;
         line-height: 15px;
     }

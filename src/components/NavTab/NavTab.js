@@ -8,8 +8,9 @@ import "./NavTab.css"
 
 function NavTab({navTabOpen, tuggleClickNavTab}) {
   return (
-    <div className={`nav-tab__underlayer ${navTabOpen && "nav-tab__underlayer_true"}`}>
-      <nav className={`nav-tab ${navTabOpen && "nav-tab_true"}`}>
+    <div className={`nav-tab ${navTabOpen ? "nav-tab_true" : ""}`}>
+      <div className={`nav-tab__underlayer ${navTabOpen ? "nav-tab__underlayer_true" : ""}`}>
+      <nav className={`nav-tab__box ${navTabOpen && "nav-tab__box_true"}`}>
         <div className="nav-tab__link-container">
           <button className="nav-tab__close-btn" type="button" onClick={tuggleClickNavTab}/>
           <ul className="nav-tab__list">
@@ -38,6 +39,7 @@ function NavTab({navTabOpen, tuggleClickNavTab}) {
           </p>
         </NavLink>
       </nav>
+    </div>
     </div>
   );
 }
