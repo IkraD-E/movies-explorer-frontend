@@ -14,13 +14,13 @@ function Movies({onCardDeleteClick, onCardSaveClick, children, movieList}) {
       {children}
       <main className="movies-list">
         <Search/>
-          <MoviesCardList
-            movieList={movieList}
-            movieCount={movieCount}
-            onCardSaveClick={onCardSaveClick}
-            onCardDeleteClick={onCardDeleteClick}
-          />
-          <More notNeedMore={notNeedMore}/>
+        <MoviesCardList
+          movieList={movieList}
+          movieCount={movieCount}
+          onCardSaveClick={onCardSaveClick}
+          onCardDeleteClick={onCardDeleteClick}
+        />
+        <More notNeedMore={notNeedMore}/>
         <Footer/>
       </main>
     </>

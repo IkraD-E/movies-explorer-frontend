@@ -23,7 +23,7 @@ import Profile from "../Profile/Profile";
 function App() {
   const [currentUser, setUserData] = React.useState({});
   const [movieList, setMovies] = React.useState(cardList);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const navigate = useNavigate();
   
   const [userEmail, setUserEmail] = React.useState("");
@@ -113,10 +113,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={
-                <Main>
-                </Main>
-              }
+              element={<Main/>}
             />
             <Route
               path="/signin"
@@ -147,29 +144,27 @@ function App() {
             />
             <Route
               path="/movies"
-              element={
-                <Movies
-                  movieList={movieList}
-                >
-                </Movies>
-              }
+              element={<ProtectedRoute
+                element={Movies}
+                movieList={movieList}
+                isLoggedIn={isLoggedIn}
+              />}
             />
             <Route
               path="/saved-movies"
-              element={
-                <SavedMovies
-                  movieList={movieList}
-                >
-                </SavedMovies>
-              }
+              element={<ProtectedRoute
+                element={SavedMovies}
+                movieList={movieList}
+                isLoggedIn={isLoggedIn}
+              />}
             />
             <Route
               path="/profile"
-              element={
-                <Profile>
-                </Profile>
-              }
-            ></Route>
+              element={<ProtectedRoute
+                element={Profile}
+                isLoggedIn={isLoggedIn}
+              />}
+            />
             <Route
               path="*"
               element={<NotFound/>}

@@ -28,23 +28,6 @@ function Header({isLoggedIn}) {
         isLoggedIn={isLoggedIn}
       />
     </header>
-    // (path === "/signup" || path === "/signin") ?
-    // (<header className="header header_auth">
-    //   <Link className="header__logo-container" to="/">
-    //     <img className="header__logo" src={logo} alt="Логотип"/>
-    //   </Link>
-    // </header>) : (
-    //   <header className={`header ${path === "/" ? "" : "header_white"}`}>
-    //     <Link className="header__logo-container" to="/">
-    //       <img className="header__logo" src={logo} alt="Логотип"/>
-    //     </Link>
-    //     {path === "/" ? "" : <NavMini tuggleClickNavTab={tuggleClickNavTab} />}
-    //     <Navigation 
-    //       path={path}
-    //       navTabOpen={navTabOpen}
-    //       tuggleClickNavTab={tuggleClickNavTab}
-    //     />
-    //   </header>) 
   )
 }
 export default Header;
