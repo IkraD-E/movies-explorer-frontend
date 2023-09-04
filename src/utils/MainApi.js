@@ -1,12 +1,12 @@
 const apiParams = {
-    link: 'https://api.ikrad-movies-explorer.nomoredomains.xyz/',
+    link: 'https://api.nomoreparties.co/beatfilm-movies/',
     // link: 'http://localhost:3001/',
     headers: {
         'Content-Type': 'application/json'
     }
 }
 
-class Api{
+class MainApi{
     constructor({link, headers}){
         this._link = link;
         this._headers = headers;
@@ -112,4 +112,4 @@ class Api{
     }
 }
 
-export const api = new Api(apiParams);
+export const mainApi = new MainApi(apiParams);

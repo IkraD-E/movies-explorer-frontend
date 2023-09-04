@@ -8,8 +8,9 @@ import "./App.css"
 import Main from "../Main/Main";
 import AuthForm from "../AuthForm/AuthForm";
 
-import { api } from '../../utils/Api';
-import { auth } from "../../utils/Auth";
+import { mainApi } from '../../utils/MainApi';
+import { moviesApi } from "../../utils/MoviesApi";
+
 import NotFound from "../NotFound/NotFound";
 import Movies from "../Movies/Movies";
 import Header from "../Header/Header";
@@ -22,26 +23,98 @@ import Profile from "../Profile/Profile";
 function App() {
   const [currentUser, setUserData] = React.useState({});
   const [movieList, setMovies] = React.useState(cardList);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const navigate = useNavigate();
+  
+  const [userEmail, setUserEmail] = React.useState("");
+  function handleSetUserEmail(email) {
+    setUserEmail(email);
+  }
 
-  const [navTabOpen, setNavTab] = React.useState(false);
-  function tuggleClickNavTab() {
-    setNavTab(!navTabOpen);
+  function handleTokenCheck() {
+    moviesApi.checkToken()
+        .then(res => res.json())
+        .then(res => {
+          if (res) {
+            setIsLoggedIn(true);
+            handleSetUserEmail(res.email);
+            navigate("/", {replace: true});
+          }
+        })
+        .catch(err => console.log(`Ошибка проверки токена: ${err}`));
+  }
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, [])
+
+  React.useEffect(() => {
+    isLoggedIn && Promise.all([mainApi.getUserDataFromServer(), mainApi.getMoviesFromServer()])
+      .then(([userData, movies]) => {
+          setUserData(userData);
+          setMovies(movies.reverse());
+    })
+      .catch(err => console.log(err));
+  }, [isLoggedIn]);
+
+
+  const [serverCallbackStatus, setServerCallbackStatus] = React.useState(false);
+  function handleSetServerCallbackStatus(res) {
+    setServerCallbackStatus(res.ok);
+  }
+
+  const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = React.useState(false);
+  function handleOpenInfoTooltipPopup() {
+    setIsInfoTooltipPopupOpen(true);
+  }
+
+  function handleRegisterSubmit(email, password) {
+    moviesApi.addNewUserToServer(email, password)
+      .then((res) =>{
+        handleSetServerCallbackStatus(res);
+        handleOpenInfoTooltipPopup();
+      })
+      .catch(err => {
+        handleSetServerCallbackStatus(err);
+        handleOpenInfoTooltipPopup();
+        console.log(`Ошибка добавления нового пользователя на сервер: ${err.status}`);
+      });
+  }
+
+  function handleLogInSubmit(email, password) {
+    moviesApi.handleUserAuthorization(email, password)
+      .then((res => res.json()))
+      .then((data) =>{
+        if (data){
+          setIsLoggedIn(true);
+          navigate("/", {replace: true});
+          handleSetUserEmail(email);
+          return data;
+        }
+      })
+      .catch(err => {
+        handleSetServerCallbackStatus(err);
+        handleOpenInfoTooltipPopup();
+        console.log(`Ошибка входа пользователя: ${err}`);
+      });
+  }
+
+  function handleSignOut() {
+    moviesApi.logout();
+    setIsLoggedIn(false);
+    navigate('/signin');
   }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
         <div className="page">
+          <Header isLoggedIn={isLoggedIn}/>
           <Routes>
             <Route
               path="/"
               element={
                 <Main>
-                  <Header
-                    navTabOpen={navTabOpen}
-                    tuggleClickNavTab={tuggleClickNavTab}
-                  >
-                  </Header>
                 </Main>
               }
             />
@@ -55,7 +128,6 @@ function App() {
                   linkText="Регистрация"
                   link="/signup"
                 >
-                  <Header/>
                 </AuthForm>
               }
             />
@@ -70,7 +142,6 @@ function App() {
                   linkText="Войти"
                   link="/signin"
                 >
-                  <Header/>
                 </AuthForm>
               }
             />
@@ -80,11 +151,6 @@ function App() {
                 <Movies
                   movieList={movieList}
                 >
-                  <Header
-                    navTabOpen={navTabOpen}
-                    tuggleClickNavTab={tuggleClickNavTab}
-                  >
-                  </Header>
                 </Movies>
               }
             />
@@ -92,12 +158,8 @@ function App() {
               path="/saved-movies"
               element={
                 <SavedMovies
-                  movieList={movieList}>
-                  <Header
-                    navTabOpen={navTabOpen}
-                    tuggleClickNavTab={tuggleClickNavTab}
-                  >
-                  </Header>
+                  movieList={movieList}
+                >
                 </SavedMovies>
               }
             />
@@ -105,11 +167,6 @@ function App() {
               path="/profile"
               element={
                 <Profile>
-                <Header
-                  navTabOpen={navTabOpen}
-                  tuggleClickNavTab={tuggleClickNavTab}
-                >
-                </Header>
                 </Profile>
               }
             ></Route>

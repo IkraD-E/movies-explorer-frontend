@@ -1,12 +1,12 @@
 const apiParams = {
-    link: 'https://api.ikrad-movies-explorer.nomoredomains.xyz/',
+    link: 'Git',
     // link: 'http://localhost:3001/',
     headers: {
         'Content-Type': 'application/json'
     }
 }
 
-class Auth{
+class MoviesApi{
     constructor({link, headers}){
         this._link = link;
         this._headers = headers;
@@ -85,4 +85,4 @@ class Auth{
     }
 }
 
-export const auth = new Auth(apiParams);
+export const moviesApi = new MoviesApi(apiParams);
