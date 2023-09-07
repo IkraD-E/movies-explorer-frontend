@@ -19,6 +19,7 @@ import Header from "../Header/Header";
 import { cardList } from "../../utils/const";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
 function App() {
   const [currentUser, setUserData] = React.useState({});
@@ -68,8 +69,8 @@ function App() {
     setIsInfoTooltipPopupOpen(true);
   }
 
-  function handleRegisterSubmit(email, password) {
-    moviesApi.addNewUserToServer(email, password)
+  function handleRegisterSubmit({email, password, name}) {
+    moviesApi.addNewUserToServer(email, password, name)
       .then((res) =>{
         handleSetServerCallbackStatus(res);
         handleOpenInfoTooltipPopup();
@@ -81,7 +82,7 @@ function App() {
       });
   }
 
-  function handleLogInSubmit(email, password) {
+  function handleLogInSubmit({email, password}) {
     moviesApi.handleUserAuthorization(email, password)
       .then((res => res.json()))
       .then((data) =>{
@@ -105,6 +106,10 @@ function App() {
     navigate('/signin');
   }
 
+  function closeAllPopups() {
+    setIsInfoTooltipPopupOpen(false);
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
@@ -124,6 +129,7 @@ function App() {
                   afterWords="Ещё не зарегистрированы?&nbsp;"
                   linkText="Регистрация"
                   link="/signup"
+                  onSubmit={handleLogInSubmit}
                 >
                 </AuthForm>
               }
@@ -138,6 +144,7 @@ function App() {
                   afterWords="Уже зарегистрированы?&nbsp;"
                   linkText="Войти"
                   link="/signin"
+                  onSubmit={handleRegisterSubmit}
                 >
                 </AuthForm>
               }
@@ -170,6 +177,11 @@ function App() {
               element={<NotFound/>}
             />
           </Routes>
+          <InfoTooltip 
+            isOpen={isInfoTooltipPopupOpen}
+            onClose={closeAllPopups}
+            serverCallbackStatus={serverCallbackStatus}
+          />
         </div>
     </div>
     </CurrentUserContext.Provider>

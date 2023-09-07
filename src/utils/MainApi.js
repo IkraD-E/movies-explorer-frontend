@@ -1,6 +1,6 @@
 const apiParams = {
-    link: 'https://api.nomoreparties.co/beatfilm-movies/',
-    // link: 'http://localhost:3001/',
+    // link: 'https://api.nomoreparties.co/beatfilm-movies/',
+    link: 'http://localhost:3001/',
     headers: {
         'Content-Type': 'application/json'
     }

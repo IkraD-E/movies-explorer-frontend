@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { mailPattern } from "../../consts/patterns";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import "./AuthForm.css"
 
-function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link, children}) {
+function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link, children, onSubmit}) {
   const {
     values,
     handleChange,
@@ -12,6 +13,13 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
     isValid,
   } = useFormAndValidation();
 
+  function submit(e) {
+    e.preventDefault();
+    console.log(values);
+    onSubmit(
+      values
+    );
+  }
 
   return (
     <>
@@ -21,6 +29,7 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
           <h1 className="auth__header">{formName}</h1>
           <form 
             className="auth__form"
+            onSubmit={submit}
           >
             <div className="auth__set">
               {isRegistration 
@@ -54,6 +63,7 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
                 placeholder="Введите Email"
                 value={values.email || ""}
                 onChange={handleChange}
+                pattern={mailPattern}
               />
               <span className={`auth__error email-error ${errors.email && "auth__error_active"}`}>{errors.email || ""}</span>
               <label htmlFor="password" className="auth__label">Пароль</label>

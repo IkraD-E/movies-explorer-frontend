@@ -1,6 +1,6 @@
 const apiParams = {
-    link: 'Git',
-    // link: 'http://localhost:3001/',
+    // link: 'Git',
+    link: 'http://localhost:3001/',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -14,7 +14,7 @@ class MoviesApi{
 
     _checkResponse(res) {
         if (res.ok) {
-            return res.json()
+            return res
         }
             return Promise.reject(res)
     }
