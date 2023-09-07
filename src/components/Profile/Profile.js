@@ -4,7 +4,7 @@ import "./Profile.css"
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 import { Link } from "react-router-dom";
 
-function Profile({onSubmit, children}) {
+function Profile({onSubmit, children, signOut}) {
   const {
     values,
     handleChange,
@@ -70,9 +70,9 @@ function Profile({onSubmit, children}) {
               Редактировать
             </button>
           </form>
-            <Link className="profile__link" to='/'>
+            <p className="profile__log-out" onClick={signOut}>
               Выйти из аккаунта
-            </Link>
+            </p>
         </section>
       </main>
     </>

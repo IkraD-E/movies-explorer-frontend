@@ -103,7 +103,7 @@ function App() {
   function handleSignOut() {
     moviesApi.logout();
     setIsLoggedIn(false);
-    navigate('/signin');
+    navigate('/');
   }
 
   function closeAllPopups() {
@@ -170,6 +170,7 @@ function App() {
               element={<ProtectedRoute
                 element={Profile}
                 isLoggedIn={isLoggedIn}
+                signOut={handleSignOut}
               />}
             />
             <Route

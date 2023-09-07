@@ -4,16 +4,14 @@ import More from "../More/More";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Search from "../Search/Search";
 
-function Movies({onCardDeleteClick, onCardSaveClick, children, movieList}) {
+function Movies({onCardDeleteClick, onCardSaveClick, movieList}) {
   const movieCount = 3;
   const notNeedMore = movieList.length < movieCount;
 
   
   return (
-    <>
-      {children}
-      <main className="movies-list">
-        <Search/>
+    <main className="movies-list">
+      <Search/>
         <MoviesCardList
           movieList={movieList}
           movieCount={movieCount}
@@ -21,9 +19,8 @@ function Movies({onCardDeleteClick, onCardSaveClick, children, movieList}) {
           onCardDeleteClick={onCardDeleteClick}
         />
         <More notNeedMore={notNeedMore}/>
-        <Footer/>
-      </main>
-    </>
+      <Footer/>
+    </main>
     );
 }
 

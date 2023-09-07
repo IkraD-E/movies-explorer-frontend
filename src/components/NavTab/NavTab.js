@@ -31,7 +31,6 @@ function NavTab({navTabOpen, tuggleClickNavTab}) {
             </li>
           </ul>
         </div>
-        {console.log(navTabOpen)}
         <NavLink to="/profile" className='nav-tab__container' onClick={tuggleClickNavTab}>
           <img className="nav-tab__link-image" src={navLinkImage} alt="Логотип"/>
           <p className="nav-tab__link-text">
