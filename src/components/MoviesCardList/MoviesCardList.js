@@ -1,10 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import "./MoviesCardList.css"
 
 import MoviesCard from "../MoviesCard/MoviesCard";
+import More from "../More/More";
 
-export default function MoviesCardList({movieList, movieCount, onMovieSaveClick, onMovieDeleteClick}) {
+export default function MoviesCardList({movieList, onMovieSaveClick, onMovieDeleteClick}) {
+    const [movieCount, setMovieCount] = useState(0);
+    const [movieMoreCount, setMovieMoreCount] = useState(0);
+    const moviesNum = {
+        mobile: 2,
+        tablet: 2,
+        laptop: 3,
+    };
+    const moviesMoreNum = {
+        mobile: 5,
+        tablet: 8,
+        laptop: 12,
+    };
+    function loadMoreMovie(){
+        setMovieCount(movieCount + 3)
+    }
+
+    const checkWindowWidth = () => {
+      setTimeout(() => setWindowWidth(window.innerWidth), 1000);
+    };
+    
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    
+    useEffect(() => {
+        window.addEventListener('resize', setWindowWidth);
+
+        if (windowWidth > 1024) {
+        setMovieCount(moviesMoreNum.laptop);
+        setMovieMoreCount(moviesNum.laptop);
+        } else if (windowWidth > 768) {
+        setMovieCount(moviesMoreNum.tablet);
+        setMovieMoreCount(moviesNum.tablet);
+        } else {
+        setMovieCount(moviesMoreNum.mobile);
+        setMovieMoreCount(moviesNum.mobile);
+        }
+
+        return () => window.removeEventListener('resize', setWindowWidth);
+    }, [windowWidth]);
+
+
+    const notNeedMore = movieList.length < movieCount;
+
     return (
         <section className="movies" aria-label="movies">
             {movieList ? 
@@ -13,7 +57,7 @@ export default function MoviesCardList({movieList, movieCount, onMovieSaveClick,
                         index + 1 > movieCount ||
                         <MoviesCard
                             card={movie}
-                            key={movie.movieId}
+                            key={movie.id}
                             onMovieSaveClick={onMovieSaveClick}
                             onMovieDeleteClick={onMovieDeleteClick}
                         />
@@ -23,6 +67,7 @@ export default function MoviesCardList({movieList, movieCount, onMovieSaveClick,
                     <h2 className="movies-list__text-empty">Здесь пока пусто</h2>
                 </div>
             }
+            <More notNeedMore={notNeedMore} loadMoreMovie={loadMoreMovie}/>
         </section>
     )
 }

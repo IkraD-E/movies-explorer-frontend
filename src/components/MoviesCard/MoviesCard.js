@@ -3,11 +3,12 @@ import React from "react";
 import "./MoviesCard.css"
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { movieUrl } from "../../consts/urls";
 
-export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
+export default function MoviesCard({card, onMovieSaveClick, onCardDeleteClick}) {
+    console.log(card);
     const hours =  Math.floor(card.duration / 60);
     const minutes = card.duration % 60;
-    
     const time = `${hours}ч ${minutes}м`
 
     const path = useLocation().pathname;
@@ -18,6 +19,7 @@ export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
     );
 
     function handleCardSaveClick() {
+        onMovieSaveClick(card)
         tuggleIsSaved(!isSaved)
     }
 
@@ -47,7 +49,7 @@ export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
             </div>
             <img
                 className="card__photo"
-                src={card.image}
+                src={`${movieUrl}${card.image.url}`}
                 alt={card.nameRU}
             />
             {isOwn && <button className='card_delete_button' onClick={handleCardDeleteClick} type="button"/>}

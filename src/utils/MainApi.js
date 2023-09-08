@@ -14,13 +14,30 @@ class MainApi{
 
     _checkResponse(res) {
         if (res.ok) {
-            return res.json()
+            return res
         }
             return Promise.reject(res)
     }
 
     _request(url, options) {
         return fetch(url, options).then(this._checkResponse)
+    }
+
+    //Добавление пользователя на сервер
+    addNewUserToServer(email, password, name) {
+        return this._request(
+            `${this._link}signup`, 
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    "email": email,
+                    "password": password,
+                    "name": name,
+                }),
+                headers: this._headers,
+                credentials: "include"
+            }
+        );
     }
 
     //Сбор информации о пользователе
@@ -51,62 +68,46 @@ class MainApi{
         );
     }
 
-    handleChangeAvatar(newAvatarLink) {
+    //Аутентификация пользователя на сервере
+    handleUserAuthorization(email, password) {
         return this._request(
-            `${this._link}users/me/avatar`,
-            {
-                method: 'PATCH',
-                body: JSON.stringify(newAvatarLink),
-                headers: this._headers,
-                credentials: 'include',
-            }
-        );
-    }
-
-    //Сбор информации о фильмах
-    getMoviesFromServer() {
-        return this._request(
-            `${this._link}movies`,
-            {
-                method: 'GET',
-                headers: this._headers,
-                credentials: 'include',
-            }
-        );
-    }
-
-    //Добавление фильма на сервер
-    //ДОДЕЛАТЬ!!!!!!
-    //ДОДЕЛАТЬ!!!!!!
-    //ДОДЕЛАТЬ!!!!!!
-    //ДОДЕЛАТЬ!!!!!!
-    //ДОДЕЛАТЬ!!!!!!
-    //ДОДЕЛАТЬ!!!!!!
-    //ДОДЕЛАТЬ!!!!!!
-    addNewMovieToServer({filmData, userId}) {
-        const data = {
-            ...filmData,
-            owner: userId,
-          };
-        return this._request(
-            `${this._link}movies`,
+            `${this._link}signin`, 
             {
                 method: 'POST',
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    "email": email,
+                    "password": password,
+                }),
                 headers: this._headers,
-                credentials: 'include',
+                credentials: "include"
             }
         );
     }
 
-    //Удаление фильма с сервера
-    deleteMovieFromServer(movieId) {
+    //Сбор информации о пользователе
+    checkToken() {
         return this._request(
-            `${this._link}movies/${movieId}`,
+            `${this._link}users/me`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: "include"
+            }
+        );
+    }
+
+    //Удалить куку
+    logout() {
+        return this._request(
+            `${this._link}users/me`,
             {
                 method: 'DELETE',
-                headers: this._headers,
-                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: "include"
             }
         );
     }

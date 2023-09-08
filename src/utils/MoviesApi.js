@@ -1,6 +1,7 @@
+import { movieUrl } from "../consts/urls";
+
 const apiParams = {
-    // link: 'Git',
-    link: 'http://localhost:3001/',
+    link: movieUrl,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -15,7 +16,7 @@ class MoviesApi{
     _checkResponse(res) {
         console.log(res);
         if (res.ok) {
-            return res
+            return res.json()
         }
             return Promise.reject(res)
     }
@@ -24,66 +25,30 @@ class MoviesApi{
         return fetch(url, options).then(this._checkResponse)
     }
 
-    //Добавление пользователя на сервер
-    addNewUserToServer(email, password, name) {
+     //Сбор информации о фильмах
+     getMoviesFromServer() {
         return this._request(
-            `${this._link}signup`, 
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    "email": email,
-                    "password": password,
-                    "name": name,
-                }),
-                headers: this._headers,
-                credentials: "include"
-            }
-        );
-    }
-
-    //Аутентификация пользователя на сервере
-    handleUserAuthorization(email, password) {
-        return this._request(
-            `${this._link}signin`, 
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    "email": email,
-                    "password": password,
-                }),
-                headers: this._headers,
-                credentials: "include"
-            }
-        );
-    }
-
-    //Сбор информации о пользователе
-    checkToken() {
-        return this._request(
-            `${this._link}users/me`,
+            `${this._link}beatfilm-movies`,
             {
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: "include"
+                headers: this._headers,
+            }
+        );
+    }
+    
+    //Добавить лайк на сервер
+    //Убрать лайк с сервера
+    changeSaveCardStatus(cardId, isSaved) {
+        return this._request(
+            `${this._link}movies/${cardId}`,
+            {
+                method: isSaved ? 'DELETE' : 'PUT',
+                headers: this._headers,
+                credentials: 'include',
             }
         );
     }
 
-    //Удалить куку
-    logout() {
-        return this._request(
-            `${this._link}users/me`,
-            {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: "include"
-            }
-        );
-    }
 }
 
 export const moviesApi = new MoviesApi(apiParams);

@@ -33,7 +33,7 @@ function App() {
   }
 
   function handleTokenCheck() {
-    moviesApi.checkToken()
+    mainApi.checkToken()
         .then(res => res.json())
         .then(res => {
           if (res) {
@@ -50,7 +50,7 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    isLoggedIn && Promise.all([mainApi.getUserDataFromServer(), mainApi.getMoviesFromServer()])
+    isLoggedIn && Promise.all([mainApi.getUserDataFromServer(), moviesApi.getMoviesFromServer()])
       .then(([userData, movies]) => {
           setUserData(userData);
           setMovies(movies.reverse());
@@ -70,7 +70,7 @@ function App() {
   }
 
   function handleRegisterSubmit({email, password, name}) {
-    moviesApi.addNewUserToServer(email, password, name)
+    mainApi.addNewUserToServer(email, password, name)
       .then((res) =>{
         handleSetServerCallbackStatus(res);
         handleOpenInfoTooltipPopup();
@@ -83,7 +83,7 @@ function App() {
   }
 
   function handleLogInSubmit({email, password}) {
-    moviesApi.handleUserAuthorization(email, password)
+    mainApi.handleUserAuthorization(email, password)
       .then((res => res.json()))
       .then((data) =>{
         if (data){
@@ -101,13 +101,22 @@ function App() {
   }
 
   function handleSignOut() {
-    moviesApi.logout();
+    mainApi.logout();
     setIsLoggedIn(false);
     navigate('/');
   }
 
   function closeAllPopups() {
     setIsInfoTooltipPopupOpen(false);
+  }
+  function onMovieSaveClick(card) {
+    const isLiked = card.owner.some(i => i._id === currentUser._id);
+
+    moviesApi.changeSaveCardStatus(card.id, isLiked)
+      .then((newCard) => {
+        setMovies((state) => state.map((oldCard) => oldCard.id === card.id ? newCard : oldCard));
+      })
+      .catch(err => console.log(`Ошибка при добавлении лайка: ${err.status}`));
   }
 
   return (
@@ -155,6 +164,7 @@ function App() {
                 element={Movies}
                 movieList={movieList}
                 isLoggedIn={isLoggedIn}
+                onMovieSaveClick={onMovieSaveClick}
               />}
             />
             <Route
@@ -163,6 +173,7 @@ function App() {
                 element={SavedMovies}
                 movieList={movieList}
                 isLoggedIn={isLoggedIn}
+                onMovieSaveClick={onMovieSaveClick}
               />}
             />
             <Route
