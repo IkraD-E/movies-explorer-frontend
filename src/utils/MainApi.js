@@ -14,7 +14,7 @@ class MainApi{
 
     _checkResponse(res) {
         if (res.ok) {
-            return res
+            return res.json()
         }
             return Promise.reject(res)
     }
@@ -108,6 +108,43 @@ class MainApi{
                     'Content-Type': 'application/json'
                 },
                 credentials: "include"
+            }
+        );
+    }
+    
+    //Сохранить фильм
+    addNewMovieToServer(movieData) {
+        return this._request(
+            `${this._link}movies`,
+            {
+                method: 'POST',
+                body: JSON.stringify(movieData),
+                headers: this._headers,
+                credentials: 'include',
+            }
+        );
+    }
+    
+    //Сбор информации о сохраненных фильмах
+    getSavedMoviesFromServer() {
+        return this._request(
+            `${this._link}movies`,
+            {
+                method: 'GET',
+                headers: this._headers,
+                credentials: 'include',
+            }
+        );
+    }
+    
+    //Убрать из сохраненных
+    deleteSaveCardStatus(cardId) {
+        return this._request(
+            `${this._link}movies/${cardId}`,
+            {
+                method: 'DELETE',
+                headers: this._headers,
+                credentials: 'include',
             }
         );
     }

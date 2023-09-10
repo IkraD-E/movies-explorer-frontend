@@ -4,20 +4,20 @@ import Search from "../Search/Search";
 
 import "./SavedMovies.css"
 
-function SavedMovies({onCardDeleteClick, onMovieSaveClick, children, movieList}) {
+function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsShort}) {
   return (
-    <>
-      {children}
-      <main className="saved-movies">
-        <Search/>
-        <MoviesCardList
-          movieList={movieList} 
-          onMovieSaveClick={onMovieSaveClick}
-          onCardDeleteClick={onCardDeleteClick}
-        />
-        <Footer/>
-      </main>
-    </>
+    <main className="saved-movies">
+      <Search
+        isShort={isShort}
+        setIsShort={setIsShort}
+      />
+      <MoviesCardList
+        movieList={movieList} 
+        onMovieSaveClick={onMovieSaveClick}
+        onCardDeleteClick={onCardDeleteClick}
+      />
+      <Footer/>
+    </main>
   );
 }
 

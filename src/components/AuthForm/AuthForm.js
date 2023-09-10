@@ -1,11 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { mailPattern } from "../../consts/patterns";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import "./AuthForm.css"
 
-function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link, children, onSubmit}) {
+function AuthForm({isLoggedIn, isRegistration, formName, btnText, afterWords, linkText, link, children, onSubmit}) {
   const {
     values,
     handleChange,
@@ -15,10 +15,13 @@ function AuthForm({isRegistration, formName, btnText, afterWords, linkText, link
 
   function submit(e) {
     e.preventDefault();
-    console.log(values);
     onSubmit(
       values
     );
+  }
+
+  if (isLoggedIn) {
+    return <Navigate to='/movies' replace={true}/>;
   }
 
   return (

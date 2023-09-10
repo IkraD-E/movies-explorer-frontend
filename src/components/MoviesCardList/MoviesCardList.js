@@ -5,7 +5,7 @@ import "./MoviesCardList.css"
 import MoviesCard from "../MoviesCard/MoviesCard";
 import More from "../More/More";
 
-export default function MoviesCardList({movieList, onMovieSaveClick, onMovieDeleteClick}) {
+export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieList}) {
     const [movieCount, setMovieCount] = useState(0);
     const [movieMoreCount, setMovieMoreCount] = useState(0);
     const moviesNum = {
@@ -13,24 +13,25 @@ export default function MoviesCardList({movieList, onMovieSaveClick, onMovieDele
         tablet: 2,
         laptop: 3,
     };
+
     const moviesMoreNum = {
         mobile: 5,
         tablet: 8,
         laptop: 12,
     };
+
     function loadMoreMovie(){
-        setMovieCount(movieCount + 3)
+        setMovieCount(movieCount + movieMoreCount)
     }
+
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     const checkWindowWidth = () => {
       setTimeout(() => setWindowWidth(window.innerWidth), 1000);
     };
     
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-    
     useEffect(() => {
-        window.addEventListener('resize', setWindowWidth);
+        window.addEventListener('resize', checkWindowWidth);
 
         if (windowWidth > 1024) {
         setMovieCount(moviesMoreNum.laptop);
@@ -43,9 +44,8 @@ export default function MoviesCardList({movieList, onMovieSaveClick, onMovieDele
         setMovieMoreCount(moviesNum.mobile);
         }
 
-        return () => window.removeEventListener('resize', setWindowWidth);
+        return () => window.removeEventListener('resize', checkWindowWidth);
     }, [windowWidth]);
-
 
     const notNeedMore = movieList.length < movieCount;
 
@@ -57,14 +57,14 @@ export default function MoviesCardList({movieList, onMovieSaveClick, onMovieDele
                         index + 1 > movieCount ||
                         <MoviesCard
                             card={movie}
-                            key={movie.id}
+                            key={movie.movieId}
                             onMovieSaveClick={onMovieSaveClick}
-                            onMovieDeleteClick={onMovieDeleteClick}
+                            savedMovieList={savedMovieList}
                         />
                     ))}
                 </ul> ) :
                 <div className="movies-list__empty">
-                    <h2 className="movies-list__text-empty">Здесь пока пусто</h2>
+                    <h2 className="movies-list__text-empty">Ничего не найдено</h2>
                 </div>
             }
             <More notNeedMore={notNeedMore} loadMoreMovie={loadMoreMovie}/>

@@ -14,7 +14,6 @@ class MoviesApi{
     }
 
     _checkResponse(res) {
-        console.log(res);
         if (res.ok) {
             return res.json()
         }
@@ -32,19 +31,6 @@ class MoviesApi{
             {
                 method: 'GET',
                 headers: this._headers,
-            }
-        );
-    }
-    
-    //Добавить лайк на сервер
-    //Убрать лайк с сервера
-    changeSaveCardStatus(cardId, isSaved) {
-        return this._request(
-            `${this._link}movies/${cardId}`,
-            {
-                method: isSaved ? 'DELETE' : 'PUT',
-                headers: this._headers,
-                credentials: 'include',
             }
         );
     }

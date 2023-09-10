@@ -15,26 +15,53 @@ import NotFound from "../NotFound/NotFound";
 import Movies from "../Movies/Movies";
 import Header from "../Header/Header";
 
-
-import { cardList } from "../../utils/const";
 import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { movieUrl } from "../../consts/urls";
 
 function App() {
-  const [currentUser, setUserData] = React.useState({});
-  const [movieList, setMovies] = React.useState(cardList);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [currentUser, setUserData] = React.useState({});
+
+  const [beatFilmsMoviesList, setBeatFilmsMoviesList] = React.useState(null);
+  const [savedMovieList, setSavedMovies] = React.useState([]);
+  
+  const [beatFilmsIsShort, setBeatFilmsIsShort] = React.useState(false);
+  function tugleisBeatFilmsIsShort() {
+    setBeatFilmsIsShort(!beatFilmsIsShort)
+  }
+  const [savedMoviesIsShort, setSavedMoviesIsShort] = React.useState(false);
+  function tugleisSavedFilmsIsShort() {
+    setSavedMoviesIsShort(!beatFilmsIsShort)
+  }
+  const [searchValue, setSearchValue] = React.useState({});
   const navigate = useNavigate();
   
   const [userEmail, setUserEmail] = React.useState("");
   function handleSetUserEmail(email) {
     setUserEmail(email);
   }
+  function movieEdit(moviesData) {
+    const newMoviesData = moviesData.map((movie) => {
+        const editedMovie = {
+          ...movie,
+          movieId: movie.id,
+          image: movieUrl + movie.image.url,
+          thumbnail: movieUrl + movie.image.formats.thumbnail.url,
+        };
+        delete editedMovie.id;
+        delete editedMovie.created_at;
+        delete editedMovie.updated_at;
+
+        return editedMovie;
+      }
+    )
+    return newMoviesData;
+  }
 
   function handleTokenCheck() {
     mainApi.checkToken()
-        .then(res => res.json())
         .then(res => {
           if (res) {
             setIsLoggedIn(true);
@@ -50,14 +77,43 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    isLoggedIn && Promise.all([mainApi.getUserDataFromServer(), moviesApi.getMoviesFromServer()])
-      .then(([userData, movies]) => {
-          setUserData(userData);
-          setMovies(movies.reverse());
+    if (!beatFilmsMoviesList) {
+      if ('beatFilmsMovies' in localStorage) {
+        const filmList = movieEdit(JSON.parse(localStorage.getItem('beatFilmsMovies')));
+        setBeatFilmsMoviesList(filmList);
+      } else {
+        moviesApi
+          .getMoviesFromServer()
+          .then((movies) => {
+            const filmList = movieEdit(movies);
+            setBeatFilmsMoviesList(filmList);
+            localStorage.setItem('beatFilmsMovies', JSON.stringify(movies));
+          })
+          .catch((err) => console.log("Ошибка получения карточек"))
+      }
+    }
+  }, [beatFilmsMoviesList])
+
+  React.useEffect(() => {
+    isLoggedIn && Promise.all(
+        [
+          mainApi.getUserDataFromServer(), 
+          moviesApi.getMoviesFromServer(),
+        ])
+      .then(([userData, movies ]) => {
+        setUserData(userData);
+        // setBeatFilmsMoviesList(movies.reverse());
     })
       .catch(err => console.log(err));
   }, [isLoggedIn]);
 
+  React.useEffect(() => {
+    isLoggedIn && mainApi.getSavedMoviesFromServer()
+      .then((movies) => {
+        setSavedMovies(movies.reverse());
+    })
+      .catch(err => console.log(err));
+  }, [isLoggedIn]);
 
   const [serverCallbackStatus, setServerCallbackStatus] = React.useState(false);
   function handleSetServerCallbackStatus(res) {
@@ -84,7 +140,6 @@ function App() {
 
   function handleLogInSubmit({email, password}) {
     mainApi.handleUserAuthorization(email, password)
-      .then((res => res.json()))
       .then((data) =>{
         if (data){
           setIsLoggedIn(true);
@@ -109,16 +164,31 @@ function App() {
   function closeAllPopups() {
     setIsInfoTooltipPopupOpen(false);
   }
-  function onMovieSaveClick(card) {
-    const isLiked = card.owner.some(i => i._id === currentUser._id);
-
-    moviesApi.changeSaveCardStatus(card.id, isLiked)
-      .then((newCard) => {
-        setMovies((state) => state.map((oldCard) => oldCard.id === card.id ? newCard : oldCard));
-      })
-      .catch(err => console.log(`Ошибка при добавлении лайка: ${err.status}`));
+  
+  function onMovieSaveClick(movieData) {
+    const isSaved = savedMovieList.some(saved => saved.movieId === movieData.movieId);
+    if (!isSaved) {
+      mainApi
+        .addNewMovieToServer(movieData)
+        .then((savedMovie) => {
+          console.log(savedMovie);
+          setSavedMovies([savedMovie, ...savedMovieList])
+          console.log(savedMovieList);
+        })
+        .catch(err => console.log(`Ошибка при добавлении лайка: ${err.status}`));
+    } else {
+      const savedMovieId = savedMovieList
+        .find((item) => item.movieId === movieData.movieId)._id;
+      mainApi
+        .deleteSaveCardStatus(savedMovieId)
+        .then(() => {
+          setSavedMovies((movies) =>
+            movies.filter((movie) => movie.movieId !== movieData.movieId)
+          );
+        })
+        .catch(err => console.log(`Ошибка при удалении лайка: ${err.status}`));
+    }
   }
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
@@ -139,6 +209,7 @@ function App() {
                   linkText="Регистрация"
                   link="/signup"
                   onSubmit={handleLogInSubmit}
+                  isLoggedIn={isLoggedIn}
                 >
                 </AuthForm>
               }
@@ -154,6 +225,7 @@ function App() {
                   linkText="Войти"
                   link="/signin"
                   onSubmit={handleRegisterSubmit}
+                  isLoggedIn={isLoggedIn}
                 >
                 </AuthForm>
               }
@@ -162,18 +234,23 @@ function App() {
               path="/movies"
               element={<ProtectedRoute
                 element={Movies}
-                movieList={movieList}
+                movieList={beatFilmsMoviesList}
+                savedMovieList={savedMovieList}
                 isLoggedIn={isLoggedIn}
                 onMovieSaveClick={onMovieSaveClick}
+                isShort={beatFilmsIsShort}
+                setIsShort={tugleisBeatFilmsIsShort}
               />}
             />
             <Route
               path="/saved-movies"
               element={<ProtectedRoute
                 element={SavedMovies}
-                movieList={movieList}
+                movieList={savedMovieList}
                 isLoggedIn={isLoggedIn}
                 onMovieSaveClick={onMovieSaveClick}
+                isShort={savedMoviesIsShort}
+                setIsShort={tugleisSavedFilmsIsShort}
               />}
             />
             <Route
