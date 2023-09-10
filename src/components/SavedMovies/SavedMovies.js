@@ -4,7 +4,7 @@ import Search from "../Search/Search";
 
 import "./SavedMovies.css"
 
-function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsShort}) {
+function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsShort, isLoading}) {
   return (
     <main className="saved-movies">
       <Search
@@ -15,6 +15,7 @@ function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, s
         movieList={movieList} 
         onMovieSaveClick={onMovieSaveClick}
         onCardDeleteClick={onCardDeleteClick}
+        isLoading={isLoading}
       />
       <Footer/>
     </main>

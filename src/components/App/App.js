@@ -42,6 +42,10 @@ function App() {
   function handleSetUserEmail(email) {
     setUserEmail(email);
   }
+
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isFetching, setIsFetching] = React.useState(false);
+
   function movieEdit(moviesData) {
     const newMoviesData = moviesData.map((movie) => {
         const editedMovie = {
@@ -82,6 +86,7 @@ function App() {
         const filmList = movieEdit(JSON.parse(localStorage.getItem('beatFilmsMovies')));
         setBeatFilmsMoviesList(filmList);
       } else {
+        setIsLoading(true);
         moviesApi
           .getMoviesFromServer()
           .then((movies) => {
@@ -90,6 +95,7 @@ function App() {
             localStorage.setItem('beatFilmsMovies', JSON.stringify(movies));
           })
           .catch((err) => console.log("Ошибка получения карточек"))
+          .finally(() => setIsLoading(false));
       }
     }
   }, [beatFilmsMoviesList])
@@ -126,6 +132,7 @@ function App() {
   }
 
   function handleRegisterSubmit({email, password, name}) {
+    setIsFetching(true);
     mainApi.addNewUserToServer(email, password, name)
       .then((res) =>{
         handleSetServerCallbackStatus(res);
@@ -135,10 +142,12 @@ function App() {
         handleSetServerCallbackStatus(err);
         handleOpenInfoTooltipPopup();
         console.log(`Ошибка добавления нового пользователя на сервер: ${err.status}`);
-      });
+      })
+      .finally(() => setIsFetching(false));
   }
 
   function handleLogInSubmit({email, password}) {
+    setIsFetching(true);
     mainApi.handleUserAuthorization(email, password)
       .then((data) =>{
         if (data){
@@ -152,7 +161,8 @@ function App() {
         handleSetServerCallbackStatus(err);
         handleOpenInfoTooltipPopup();
         console.log(`Ошибка входа пользователя: ${err}`);
-      });
+      })
+      .finally(() => setIsFetching(false));
   }
 
   function handleSignOut() {
@@ -240,6 +250,7 @@ function App() {
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={beatFilmsIsShort}
                 setIsShort={tugleisBeatFilmsIsShort}
+                isLoading={isLoading}
               />}
             />
             <Route
@@ -251,6 +262,7 @@ function App() {
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={savedMoviesIsShort}
                 setIsShort={tugleisSavedFilmsIsShort}
+                isLoading={isLoading}
               />}
             />
             <Route
