@@ -126,7 +126,10 @@
 .profile__submit:hover {
     opacity: .5;
 }
-
+.profile__submit_disabled {
+    cursor:no-drop;
+    opacity: .5;
+}
 .profile__log-out {
     margin: 16px 0 0;
 

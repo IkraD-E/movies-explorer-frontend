@@ -3,7 +3,6 @@ import { CurrentUserContext } from "../../context/CurrentUserContext";
 
 import "./Profile.css"
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
-import { Link } from "react-router-dom";
 
 function Profile({onSubmit, signOut}) {
   const currentUser = React.useContext(CurrentUserContext);
@@ -12,13 +11,23 @@ function Profile({onSubmit, signOut}) {
     handleChange,
     errors,
     isValid,
+    setValues,
   } = useFormAndValidation();
+
+  React.useEffect(() => {
+    setValues({
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [setValues, currentUser.name, currentUser.email]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onSubmit(values);
   }
 
+  const submitAble = isValid && (currentUser.name !== values.name || currentUser.email !== values.email)
+  
   return (
     <main className="profile">
       <section className="profile__section">
@@ -38,7 +47,7 @@ function Profile({onSubmit, signOut}) {
               id="name"
               name="name"
               className={`profile__input ${errors.name ? ("profile__input_invalid") : ""}`}
-              placeholder="Введите имя" 
+              placeholder={currentUser.name}
               value={values.name || ""}
               onChange={handleChange}
               />
@@ -56,15 +65,17 @@ function Profile({onSubmit, signOut}) {
                 id="email"
                 name="email"
                 className={`profile__input ${errors.email ? ("profile__input_invalid") : ""}`}
-                placeholder="Введите Email"
+                placeholder={currentUser.email}
                 value={values.email || ""}
                 onChange={handleChange}
+                pattern='^.+@.+\..+$'
               />
             </div>
             <span className={`profile__error email-error ${errors.email && "profile__error_active"}`}>{errors.email || ""}</span>
             </div>
           <button 
-            className={`profile__submit ${isValid ? "" : "profile__submit_disabled"}`}
+            className={`profile__submit ${submitAble ? "" : "profile__submit_disabled"}`}
+            disabled={!submitAble && true}
             type="submit"
           >
             Редактировать

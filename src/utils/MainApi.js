@@ -53,14 +53,15 @@ class MainApi{
     }
 
     //Изменить данные о пользователе на сервере
-    setUserInfo(data) {
+    setUserInfo(name, email) {
+        console.log(name, email);
         return this._request(
             `${this._link}users/me`,
             {
                 method: 'PATCH',
                 body: JSON.stringify({
-                    name: data.name,
-                    about: data.about,
+                    name: name,
+                    email: email,
                 }),
                 headers: this._headers,
                 credentials: 'include',

@@ -21,27 +21,27 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { movieUrl } from "../../consts/urls";
 
 function App() {
+  localStorage.clear()
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setUserData] = React.useState({});
 
   const [beatFilmsMoviesList, setBeatFilmsMoviesList] = React.useState(null);
-  const [savedMovieList, setSavedMovies] = React.useState([]);
-  
+  const [beatFilmsSearchText, setBeatFilmsSearchText] = React.useState('');
   const [beatFilmsIsShort, setBeatFilmsIsShort] = React.useState(false);
   function tugleisBeatFilmsIsShort() {
+    localStorage.setItem('beatFilmsSearchText', JSON.stringify(!beatFilmsIsShort));
     setBeatFilmsIsShort(!beatFilmsIsShort)
   }
+
+  const [savedMovieList, setSavedMovies] = React.useState([]);
+  const [savedMoviesSearchText, setSavedMoviesSearchText] = React.useState('');
   const [savedMoviesIsShort, setSavedMoviesIsShort] = React.useState(false);
   function tugleisSavedFilmsIsShort() {
-    setSavedMoviesIsShort(!beatFilmsIsShort)
+    localStorage.setItem('savedSearchText', JSON.stringify(!savedMoviesIsShort));
+    setSavedMoviesIsShort(!savedMoviesIsShort)
   }
-  const [searchValue, setSearchValue] = React.useState({});
   const navigate = useNavigate();
   
-  const [userEmail, setUserEmail] = React.useState("");
-  function handleSetUserEmail(email) {
-    setUserEmail(email);
-  }
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFetching, setIsFetching] = React.useState(false);
@@ -66,14 +66,15 @@ function App() {
 
   function handleTokenCheck() {
     mainApi.checkToken()
-        .then(res => {
-          if (res) {
-            setIsLoggedIn(true);
-            handleSetUserEmail(res.email);
-            navigate("/", {replace: true});
-          }
-        })
-        .catch(err => console.log(`Ошибка проверки токена: ${err}`));
+      .then(res => {
+        if (res) {
+          setIsLoggedIn(true);
+        }
+      })
+      .catch(err => {
+        setIsLoggedIn(false)
+        console.log(`Ошибка проверки токена: ${err}`)
+      });
   }
 
   React.useEffect(() => {
@@ -85,6 +86,7 @@ function App() {
       if ('beatFilmsMovies' in localStorage) {
         const filmList = movieEdit(JSON.parse(localStorage.getItem('beatFilmsMovies')));
         setBeatFilmsMoviesList(filmList);
+        setBeatFilmsSearchText(localStorage.getItem('beatFilmsSearchText'));
       } else {
         setIsLoading(true);
         moviesApi
@@ -108,7 +110,6 @@ function App() {
         ])
       .then(([userData, movies ]) => {
         setUserData(userData);
-        // setBeatFilmsMoviesList(movies.reverse());
     })
       .catch(err => console.log(err));
   }, [isLoggedIn]);
@@ -135,8 +136,9 @@ function App() {
     setIsFetching(true);
     mainApi.addNewUserToServer(email, password, name)
       .then((res) =>{
+        setIsLoggedIn(true);
         handleSetServerCallbackStatus(res);
-        handleOpenInfoTooltipPopup();
+        navigate("/movies", {replace: true});
       })
       .catch(err => {
         handleSetServerCallbackStatus(err);
@@ -152,8 +154,7 @@ function App() {
       .then((data) =>{
         if (data){
           setIsLoggedIn(true);
-          navigate("/", {replace: true});
-          handleSetUserEmail(email);
+          navigate("/movies", {replace: true});
           return data;
         }
       })
@@ -168,7 +169,15 @@ function App() {
   function handleSignOut() {
     mainApi.logout();
     setIsLoggedIn(false);
+    setBeatFilmsMoviesList("");
+    setBeatFilmsMoviesList("");
+    setBeatFilmsSearchText("");
+    setSavedMoviesIsShort("");
+    setSavedMoviesSearchText("");
+    setSavedMoviesIsShort("");
+    localStorage.clear()
     navigate('/');
+    setUserData("")
   }
 
   function closeAllPopups() {
@@ -181,7 +190,6 @@ function App() {
       mainApi
         .addNewMovieToServer(movieData)
         .then((savedMovie) => {
-          console.log(savedMovie);
           setSavedMovies([savedMovie, ...savedMovieList])
           console.log(savedMovieList);
         })
@@ -199,6 +207,38 @@ function App() {
         .catch(err => console.log(`Ошибка при удалении лайка: ${err.status}`));
     }
   }
+  const filtredMovies = React.useCallback((movies, searchText, isShort) => {
+    if (!movies) {
+      return null;
+    }
+    return movies.filter(
+      (movie) =>
+        (isShort ? movie.duration <= 40 : movie) &&
+        movie.nameRU.toLowerCase().includes(searchText.toLowerCase())
+    );
+  }, []);
+
+  function handleProfileSubmit({ name, email }){
+    setIsFetching(true);
+    console.log(name, email);
+    mainApi
+      .setUserInfo(name, email)
+      .then((userData) => {
+        setUserData({
+          name: userData.name,
+          email: userData.email,
+        });
+        isInfoTooltipPopupOpen(true);
+      })
+      .catch((err) => {
+        if (err === 409) {
+          console.log(`Пользователь с указанной почтой уже существует: ${err}`);
+        } else {
+          console.log(`Ошибка: ${err}`);
+        }
+      })
+      .finally(() => setIsFetching(false));
+  };
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
@@ -220,6 +260,8 @@ function App() {
                   link="/signup"
                   onSubmit={handleLogInSubmit}
                   isLoggedIn={isLoggedIn}
+                  isFetching={isFetching}
+                  setIsFetching={setIsFetching}
                 >
                 </AuthForm>
               }
@@ -236,6 +278,8 @@ function App() {
                   link="/signin"
                   onSubmit={handleRegisterSubmit}
                   isLoggedIn={isLoggedIn}
+                  isFetching={isFetching}
+                  setIsFetching={setIsFetching}
                 >
                 </AuthForm>
               }
@@ -244,8 +288,14 @@ function App() {
               path="/movies"
               element={<ProtectedRoute
                 element={Movies}
-                movieList={beatFilmsMoviesList}
+                movieList={filtredMovies(
+                  beatFilmsMoviesList,
+                  beatFilmsSearchText,
+                  beatFilmsIsShort,
+                )}
                 savedMovieList={savedMovieList}
+                searchText={beatFilmsSearchText}
+                setSearchText={setBeatFilmsSearchText}
                 isLoggedIn={isLoggedIn}
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={beatFilmsIsShort}
@@ -257,8 +307,14 @@ function App() {
               path="/saved-movies"
               element={<ProtectedRoute
                 element={SavedMovies}
-                movieList={savedMovieList}
+                movieList={filtredMovies(
+                  savedMovieList,
+                  savedMoviesSearchText,
+                  savedMoviesIsShort,
+                )}
                 isLoggedIn={isLoggedIn}
+                searchText={savedMoviesSearchText}
+                setSearchText={setSavedMoviesSearchText}
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={savedMoviesIsShort}
                 setIsShort={tugleisSavedFilmsIsShort}
@@ -271,6 +327,7 @@ function App() {
                 element={Profile}
                 isLoggedIn={isLoggedIn}
                 signOut={handleSignOut}
+                onSubmit={handleProfileSubmit}
               />}
             />
             <Route

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import searchImage from "../../images/search__image.svg"
@@ -7,23 +6,28 @@ import searchImageWhite from "../../images/search__image_white.svg"
 
 import "./Search.css"
 
-function Search({isShort, setIsShort}) {
-  function tugleisTumbActive() {
-    setIsShort(!isShort)
-  }
-
+function Search({isShort, setIsShort, searchSubmit, searchText, setSearchText}) {
   const {
     values,
     handleChange,
     errors,
-    isValid,
+    setValues,
   } = useFormAndValidation();
+
+  React.useEffect(() => {
+    console.log(searchText);
+    setValues({
+      search: searchText,
+    });
+  }, [setValues, searchText]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (values.search) {
       errors.search = '';
+      searchSubmit(values.search);
+      setSearchText(values.search)
     } else {
       errors.search = 'Нужно ввести ключевое слово';
     }

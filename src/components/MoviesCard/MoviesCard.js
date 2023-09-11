@@ -39,11 +39,19 @@ export default function MoviesCard({card, onMovieSaveClick, savedMovieList}) {
                         type="button"
                     />)}
             </div>
-            <img
-                className="card__photo"
-                src={card.image}
-                alt={card.nameRU}
-            />
+            <a
+                className='cards__trailer-link'
+                href={card.trailerLink}
+                target='_blank'
+                rel='noreferrer'
+            >
+                <img
+                    className="card__photo"
+                    src={card.image}
+                    alt={card.nameRU}
+                />
+            </a>
+            
         </li>
     )
 }
