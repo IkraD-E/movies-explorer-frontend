@@ -1,6 +1,5 @@
 const apiParams = {
-    // link: 'https://api.nomoreparties.co/beatfilm-movies/',
-    link: 'http://localhost:3001/',
+    link: 'http://api.ikrad-movies-explorer.nomoredomains.xyz/',
     headers: {
         'Content-Type': 'application/json'
     }
