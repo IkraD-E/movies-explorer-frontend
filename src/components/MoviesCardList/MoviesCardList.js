@@ -49,7 +49,7 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
             {isLoading ? (
                 <Preloader/>
             ) : ( 
-                !(movieList === null || movieList.length === 0) ? 
+                (!(movieList === null) || movieList.length === 0) ? 
                     (<ul className="movies__list">
                         {movieList.map((movie, index) => (
                             index + 1 > movieCount ||

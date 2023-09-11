@@ -21,12 +21,13 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { movieUrl } from "../../consts/urls";
 
 function App() {
-  localStorage.clear()
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setUserData] = React.useState({});
 
   const [beatFilmsMoviesList, setBeatFilmsMoviesList] = React.useState(null);
-  const [beatFilmsSearchText, setBeatFilmsSearchText] = React.useState('');
+  const [beatFilmsSearchText, setBeatFilmsSearchText] = React.useState(
+    localStorage.getItem('beatFilmsSearchText') === null ? '' : localStorage.getItem('beatFilmsSearchText')
+  );
   const [beatFilmsIsShort, setBeatFilmsIsShort] = React.useState(false);
   function tugleisBeatFilmsIsShort() {
     localStorage.setItem('beatFilmsSearchText', JSON.stringify(!beatFilmsIsShort));
@@ -106,10 +107,14 @@ function App() {
     isLoggedIn && Promise.all(
         [
           mainApi.getUserDataFromServer(), 
-          moviesApi.getMoviesFromServer(),
         ])
-      .then(([userData, movies ]) => {
+      .then(([userData]) => {
         setUserData(userData);
+        localStorage.setItem('beatFilmsSearchText', beatFilmsSearchText);
+        localStorage.setItem(
+          'beatFilmsIsShort',
+          JSON.stringify(beatFilmsIsShort)
+        );
     })
       .catch(err => console.log(err));
   }, [isLoggedIn]);
@@ -175,9 +180,8 @@ function App() {
     setSavedMoviesIsShort("");
     setSavedMoviesSearchText("");
     setSavedMoviesIsShort("");
-    localStorage.clear()
     navigate('/');
-    setUserData("")
+    setUserData("");
   }
 
   function closeAllPopups() {
@@ -208,6 +212,12 @@ function App() {
     }
   }
   const filtredMovies = React.useCallback((movies, searchText, isShort) => {
+    if (searchText === null) {
+      localStorage.setItem('beatFilmsSearchText', "")
+      console.log(localStorage.getItem('beatFilmsSearchText'))
+      searchText = localStorage.getItem('beatFilmsSearchText');
+      
+    }
     if (!movies) {
       return null;
     }

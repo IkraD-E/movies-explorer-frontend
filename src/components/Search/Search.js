@@ -15,7 +15,6 @@ function Search({isShort, setIsShort, searchSubmit, searchText, setSearchText}) 
   } = useFormAndValidation();
 
   React.useEffect(() => {
-    console.log(searchText);
     setValues({
       search: searchText,
     });
