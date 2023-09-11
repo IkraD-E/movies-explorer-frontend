@@ -23,22 +23,35 @@ import { movieUrl } from "../../consts/urls";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setUserData] = React.useState({});
-
   const [beatFilmsMoviesList, setBeatFilmsMoviesList] = React.useState(null);
   const [beatFilmsSearchText, setBeatFilmsSearchText] = React.useState(
-    localStorage.getItem('beatFilmsSearchText') === null ? '' : localStorage.getItem('beatFilmsSearchText')
+    localStorage.getItem('beatFilmsSearchText') ?? '' 
   );
-  const [beatFilmsIsShort, setBeatFilmsIsShort] = React.useState(false);
+  function setBeatFilmsSearchTextInStorage(data) {
+    setSavedMoviesSearchText(data);
+    localStorage.setItem('beatFilmsSearchText', data)
+  }
+
+  const [beatFilmsIsShort, setBeatFilmsIsShort] = React.useState(
+    localStorage.getItem('beatFilmsIsShort') ?? '' 
+  );
+
   function tugleisBeatFilmsIsShort() {
-    localStorage.setItem('beatFilmsSearchText', JSON.stringify(!beatFilmsIsShort));
+    localStorage.setItem('beatFilmsIsShort', JSON.stringify(!beatFilmsIsShort));
     setBeatFilmsIsShort(!beatFilmsIsShort)
   }
 
   const [savedMovieList, setSavedMovies] = React.useState([]);
   const [savedMoviesSearchText, setSavedMoviesSearchText] = React.useState('');
-  const [savedMoviesIsShort, setSavedMoviesIsShort] = React.useState(false);
+  function setSavedMoviesSearchTextInStorage(data) {
+    setSavedMoviesSearchText(data);
+    localStorage.setItem('savedSearchText', data)
+  }
+  const [savedMoviesIsShort, setSavedMoviesIsShort] = React.useState(
+    localStorage.getItem('savedMoviesIsShort') ?? '' 
+  );
   function tugleisSavedFilmsIsShort() {
-    localStorage.setItem('savedSearchText', JSON.stringify(!savedMoviesIsShort));
+    localStorage.setItem('savedMoviesIsShort', JSON.stringify(!savedMoviesIsShort));
     setSavedMoviesIsShort(!savedMoviesIsShort)
   }
   const navigate = useNavigate();
@@ -195,7 +208,6 @@ function App() {
         .addNewMovieToServer(movieData)
         .then((savedMovie) => {
           setSavedMovies([savedMovie, ...savedMovieList])
-          console.log(savedMovieList);
         })
         .catch(err => console.log(`Ошибка при добавлении лайка: ${err.status}`));
     } else {
@@ -305,7 +317,7 @@ function App() {
                 )}
                 savedMovieList={savedMovieList}
                 searchText={beatFilmsSearchText}
-                setSearchText={setBeatFilmsSearchText}
+                setSearchText={setBeatFilmsSearchTextInStorage}
                 isLoggedIn={isLoggedIn}
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={beatFilmsIsShort}
@@ -324,7 +336,7 @@ function App() {
                 )}
                 isLoggedIn={isLoggedIn}
                 searchText={savedMoviesSearchText}
-                setSearchText={setSavedMoviesSearchText}
+                setSearchText={setSavedMoviesSearchTextInStorage}
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={savedMoviesIsShort}
                 setIsShort={tugleisSavedFilmsIsShort}
