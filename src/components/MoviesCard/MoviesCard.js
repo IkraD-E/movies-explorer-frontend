@@ -1,28 +1,23 @@
 import React from "react";
 
+
 import "./MoviesCard.css"
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
-export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
+export default function MoviesCard({card, onMovieSaveClick, savedMovieList}) {
     const hours =  Math.floor(card.duration / 60);
     const minutes = card.duration % 60;
-    
     const time = `${hours}ч ${minutes}м`
 
     const path = useLocation().pathname;
-    const [isSaved, tuggleIsSaved] = useState(false);
-    const isOwn = card.owner === "russ";
+    
+    const isSaved = savedMovieList ? savedMovieList.some((item) => item.movieId === card.movieId) : false;
     const cardSaveButtonClassName = (
         `card__save-btn ${isSaved ? "card__save-btn_active" : ""}`
     );
 
     function handleCardSaveClick() {
-        tuggleIsSaved(!isSaved)
-    }
-
-    function handleCardDeleteClick() {
-        onCardDeleteClick(card);
+        onMovieSaveClick(card)
     }
 
     return (
@@ -31,7 +26,6 @@ export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
                 <div className="card__text-container">
                     <h2 className="card__title">{card.nameRU}</h2>
                     <p className="card__duration">{time}</p>
-                    
                 </div>
                 {path === "/movies" ? (
                     <button
@@ -45,12 +39,19 @@ export default function MoviesCard({card, onCardSaveClick, onCardDeleteClick}) {
                         type="button"
                     />)}
             </div>
-            <img
-                className="card__photo"
-                src={card.image}
-                alt={card.nameRU}
-            />
-            {isOwn && <button className='card_delete_button' onClick={handleCardDeleteClick} type="button"/>}
+            <a
+                className='cards__trailer-link'
+                href={card.trailerLink}
+                target='_blank'
+                rel='noreferrer'
+            >
+                <img
+                    className="card__photo"
+                    src={card.image}
+                    alt={card.nameRU}
+                />
+            </a>
+            
         </li>
     )
 }

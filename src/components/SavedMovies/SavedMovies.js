@@ -1,30 +1,35 @@
 import React from "react";
 import Footer from "../Footer/Footer";
-import More from "../More/More";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Search from "../Search/Search";
 
 import "./SavedMovies.css"
 
-function SavedMovies({onCardDeleteClick, onCardSaveClick, children, movieList}) {
-  const movieCount = 2;
-  const notNeedMore = movieList.length < movieCount;
+function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsShort, isLoading, searchText, setSearchText}) {
+  const handleSearchButtonClick = React.useCallback(
+    (input) => {
+      setSearchText(input);
+    },
+    [setSearchText]
+  );
 
   return (
-    <>
-      {children}
-      <main className="saved-movies">
-        <Search/>
-        <MoviesCardList
-          movieList={movieList} 
-          movieCount={movieCount}
-          onCardSaveClick={onCardSaveClick}
-          onCardDeleteClick={onCardDeleteClick}
-        />
-        <More notNeedMore={notNeedMore}/>
-        <Footer/>
-      </main>
-    </>
+    <main className="saved-movies">
+      <Search
+        isShort={isShort}
+        setIsShort={setIsShort}
+        searchText={searchText}
+        searchSubmit={handleSearchButtonClick}
+      />
+      <MoviesCardList
+        movieList={movieList} 
+        onMovieSaveClick={onMovieSaveClick}
+        onCardDeleteClick={onCardDeleteClick}
+        isLoading={isLoading}
+        searchText={searchText}
+      />
+      <Footer/>
+    </main>
   );
 }
 

@@ -4,19 +4,13 @@ import { NavLink } from 'react-router-dom';
 import navLinkImage from "../../images/nav__link-image.svg"
 import NavTab from "../NavTab/NavTab";
 
-import "./Nav.css"
+import "./Navigation.css"
 
-function Nav({ path, navTabOpen, tuggleClickNavTab, handleCloseNavTab }) {
+function Navigation({ path, navTabOpen, tuggleClickNavTab, isLoggedIn }) {
 
   return (
-    path === "/" ? (<nav className="nav nav_main">
-      <NavLink to="/signup" className='nav__link nav__link_bold'>
-        Регистрация
-      </NavLink>
-      <NavLink to="/signin" className='nav__btn'>
-        Войти
-      </NavLink>
-    </nav>) : (
+    (path === "/signup" || path === "/signin") ? "" :
+    (isLoggedIn ? (
       <>
         <nav className="nav">
           <NavLink to="/movies" className='nav__link nav__link_bold'>
@@ -34,8 +28,15 @@ function Nav({ path, navTabOpen, tuggleClickNavTab, handleCloseNavTab }) {
         </nav>
         <NavTab navTabOpen={navTabOpen} tuggleClickNavTab={tuggleClickNavTab}/>
       </>
-    )
+    ) : (<nav className="nav nav_main">
+    <NavLink to="/signup" className='nav__link nav__link_bold'>
+      Регистрация
+    </NavLink>
+    <NavLink to="/signin" className='nav__btn'>
+      Войти
+    </NavLink>
+  </nav>))
   );
 }
 
-export default Nav;
+export default Navigation;

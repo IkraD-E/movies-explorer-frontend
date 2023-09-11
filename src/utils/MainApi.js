@@ -1,12 +1,12 @@
 const apiParams = {
-    link: 'https://api.ikrad-movies-explorer.nomoredomains.xyz/',
-    // link: 'http://localhost:3001/',
+    // link: 'https://api.nomoreparties.co/beatfilm-movies/',
+    link: 'http://localhost:3001/',
     headers: {
         'Content-Type': 'application/json'
     }
 }
 
-class Auth{
+class MainApi{
     constructor({link, headers}){
         this._link = link;
         this._headers = headers;
@@ -36,6 +36,35 @@ class Auth{
                 }),
                 headers: this._headers,
                 credentials: "include"
+            }
+        );
+    }
+
+    //Сбор информации о пользователе
+    getUserDataFromServer() {
+        return this._request(
+            `${this._link}users/me`,
+            {
+                method: 'GET',
+                headers: this._headers,
+                credentials: 'include',
+            }
+        );
+    }
+
+    //Изменить данные о пользователе на сервере
+    setUserInfo(name, email) {
+        console.log(name, email);
+        return this._request(
+            `${this._link}users/me`,
+            {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                }),
+                headers: this._headers,
+                credentials: 'include',
             }
         );
     }
@@ -83,6 +112,43 @@ class Auth{
             }
         );
     }
+    
+    //Сохранить фильм
+    addNewMovieToServer(movieData) {
+        return this._request(
+            `${this._link}movies`,
+            {
+                method: 'POST',
+                body: JSON.stringify(movieData),
+                headers: this._headers,
+                credentials: 'include',
+            }
+        );
+    }
+    
+    //Сбор информации о сохраненных фильмах
+    getSavedMoviesFromServer() {
+        return this._request(
+            `${this._link}movies`,
+            {
+                method: 'GET',
+                headers: this._headers,
+                credentials: 'include',
+            }
+        );
+    }
+    
+    //Убрать из сохраненных
+    deleteSaveCardStatus(cardId) {
+        return this._request(
+            `${this._link}movies/${cardId}`,
+            {
+                method: 'DELETE',
+                headers: this._headers,
+                credentials: 'include',
+            }
+        );
+    }
 }
 
-export const auth = new Auth(apiParams);
+export const mainApi = new MainApi(apiParams);

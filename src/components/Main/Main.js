@@ -9,10 +9,9 @@ import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
 import Promo from "../Promo/Promo";
 
-function Main({children}) {
+function Main() {
     return (
       <>
-        {children}
         <main className="main">
             <Promo/>
           <LandingSection headerText={"О проекте"} sectionName={"about"}>
