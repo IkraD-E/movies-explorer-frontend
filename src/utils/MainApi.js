@@ -1,5 +1,5 @@
 const apiParams = {
-    link: 'http://api.ikrad-movies-explorer.nomoredomains.xyz/',
+    link: 'https://api.ikrad-movies-explorer.nomoredomains.xyz/',
     headers: {
         'Content-Type': 'application/json'
     }
