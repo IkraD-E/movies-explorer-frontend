@@ -10,9 +10,10 @@ function Search({isShort, setIsShort, searchSubmit, searchText, setSearchText}) 
   const {
     values,
     handleChange,
-    errors,
     setValues,
   } = useFormAndValidation();
+
+  const [inputError, setinputError] = React.useState(false);
 
   React.useEffect(() => {
     setValues({
@@ -24,11 +25,11 @@ function Search({isShort, setIsShort, searchSubmit, searchText, setSearchText}) 
     e.preventDefault();
 
     if (values.search) {
-      errors.search = '';
+      setinputError(false);
       searchSubmit(values.search);
-      setSearchText(values.search)
+      setSearchText && setSearchText(values.search)
     } else {
-      errors.search = 'Нужно ввести ключевое слово';
+      setinputError(true);
     }
     return;
   };
@@ -41,9 +42,6 @@ function Search({isShort, setIsShort, searchSubmit, searchText, setSearchText}) 
           <div className="search__form-container">
             <div className="search__input-container">
               <input 
-                required 
-                minLength="2" 
-                maxLength="30" 
                 type="text" 
                 id="search"
                 name="search"
@@ -52,7 +50,9 @@ function Search({isShort, setIsShort, searchSubmit, searchText, setSearchText}) 
                 value={values.search || ""}
                 onChange={handleChange}
               />
-              <span className={`search__error input-error ${errors.search && "search__error_active"}`}>{errors.search || ""}</span>
+              <span className={`search__error input-error ${inputError && "search__error_active"}`}>
+                Нужно ввести ключевое слово
+              </span>
             </div>
             <div className="search__btn-container">
               <button 

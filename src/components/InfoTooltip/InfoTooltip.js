@@ -5,7 +5,8 @@ import tooltipImageFailed from '../../images/popup__tooltip-image_failed.svg'
 
 import './InfoTooltip.css'
 
-export default function InfoTooltip({isOpen, onClose, serverCallbackStatus}) {
+export default function InfoTooltip({isOpen, onClose, serverCallbackStatus, infoToolTipMassage}) {
+
     return (
         <div className={`popup ${isOpen && "popup_opened"}`} id={`popup__info-tooltip`}>
             <div className="popup__container">
@@ -16,7 +17,7 @@ export default function InfoTooltip({isOpen, onClose, serverCallbackStatus}) {
                     alt="Вы успешно зарегистрировалить!"
                 />
                 <h2 className="popup__tooltip-header">
-                    {serverCallbackStatus ? "Вы успешно зарегистрировались!" : "Что-то пошло не так! Попробуйте ещё раз."}
+                    {infoToolTipMassage}
                 </h2>
             </div>
         </div>

@@ -1,5 +1,5 @@
 const apiParams = {
-    link: 'https://api.ikrad-movies-explorer.nomoredomains.xyz/',
+    link: 'http://localhost:3001/',
     headers: {
         'Content-Type': 'application/json'
     }
@@ -69,7 +69,7 @@ class MainApi{
     }
 
     //Аутентификация пользователя на сервере
-    handleUserAuthorization(email, password) {
+    handleUserAuthorization({email, password}) {
         return this._request(
             `${this._link}signin`, 
             {
