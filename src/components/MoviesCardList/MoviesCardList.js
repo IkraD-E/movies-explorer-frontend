@@ -15,19 +15,17 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
 
     const moviesCards = React.useCallback(() => {
         if (windowWidth > 420) {
-            setMovieCount(3);
+            setMovieCount(12);
         } else {
-            setMovieCount(2);
+            setMovieCount(5);
         }
     }, [windowWidth]);
 
     function loadMoreMovie() {
-        if (windowWidth > 800) {
-            setMovieCount(movieCount + 12);
-        } else if (windowWidth > 420) {
-            setMovieCount(movieCount + 8);
+        if (windowWidth > 420) {
+            setMovieCount(movieCount + 3);
         } else {
-            setMovieCount(movieCount + 5);
+            setMovieCount(movieCount + 2);
         }
     };
 
