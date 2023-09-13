@@ -153,8 +153,7 @@ function App() {
       .then((res) =>{
         handleSetServerCallbackStatus(res);
         setInfoToolTipMassage("Вы успешно зарегестрированны")
-        setIsLoggedIn(true);
-        navigate("/movies", {replace: true});
+        handleLogInSubmit({email, password});
       })
       .catch(err => {
         handleSetServerCallbackStatus(err);
