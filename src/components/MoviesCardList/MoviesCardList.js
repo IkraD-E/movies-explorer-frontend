@@ -9,7 +9,6 @@ import { useLocation } from "react-router-dom";
 
 export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieList, isLoading, searchText, isShort}) {
     const path = useLocation().pathname;
-    console.log(movieList);
 
     const [movieCount, setMovieCount] = useState(path === '/saved-movies' ? movieList.length : 0);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -46,7 +45,7 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
         if (searchText.length || isShort) {
           moviesCards();
         }
-    }, [searchText, isShort, moviesCards]);
+    }, [searchText, isShort, moviesCards, movieList]);
 
     const notNeedMore = (movieList && movieList.length <= movieCount );
     return (
@@ -54,9 +53,9 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
             {isLoading ? (
                 <Preloader/>
             ) : ( 
-                (<ul className="movies__list">
-                    {(!(movieList === null) && movieList.length !== 0) ?
-                        (movieList.map((movie, index) => (
+                (!(movieList === null) && movieList.length !== 0) ? 
+                    (<ul className="movies__list">
+                        {movieList.map((movie, index) => (
                             index + 1 > movieCount ||
                             <MoviesCard
                                 card={movie}
@@ -64,18 +63,16 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
                                 onMovieSaveClick={onMovieSaveClick}
                                 savedMovieList={savedMovieList}
                             />
-                        ))) : (
-                            (
-                                (!searchText && !(movieList === null) ? 
-                                <div className="movies-list__empty">
-                                    <h2 className="movies-list__text-empty">Ничего не найдено</h2>
-                                </div> : 
-                                "")
-                            )
-                        )}
-                </ul> )
+                        ))}
+                    </ul> ) : (
+                        (searchText && (!(movieList === null) || Array(movieList) === 0) ? 
+                        <div className="movies-list__empty">
+                            <h2 className="movies-list__text-empty">Ничего не найдено</h2>
+                        </div> : 
+                        "")
+                    )
             )}
-            {movieCount > 0 && <More notNeedMore={notNeedMore} loadMoreMovie={loadMoreMovie}/>}
+            {movieCount > 0 && movieList !== null && <More notNeedMore={notNeedMore} loadMoreMovie={loadMoreMovie}/>}
         </section>
     )
 }

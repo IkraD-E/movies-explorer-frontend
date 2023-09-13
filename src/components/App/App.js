@@ -21,7 +21,7 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { movieUrl } from "../../consts/urls";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [currentUser, setUserData] = React.useState({});
   const [beatFilmsMoviesList, setBeatFilmsMoviesList] = React.useState(null);
   const [beatFilmsSearchText, setBeatFilmsSearchText] = React.useState(
@@ -111,12 +111,12 @@ function App() {
           .finally(() => setIsLoading(false));
       }
     }
-  }, [beatFilmsMoviesList])
+  }, [beatFilmsMoviesList, beatFilmsSearchText, beatFilmsIsShort])
 
   React.useEffect(() => {
     isLoggedIn && Promise.all(
         [
-          mainApi.getUserDataFromServer(), 
+          mainApi.getUserDataFromServer(),
         ])
       .then(([userData]) => {
         setUserData(userData);
@@ -210,10 +210,6 @@ function App() {
     if (!movies) {
       return null;
     }
-    if (searchText === null) {
-      localStorage.setItem('beatFilmsSearchText', "")
-      searchText = localStorage.getItem('beatFilmsSearchText'); 
-    }
     return movies.filter(
       (movie) =>
         (isShort ? movie.duration <= 40 : movie) &&
@@ -254,7 +250,7 @@ function App() {
     mainApi.logout();
     setIsLoggedIn(false);
     setBeatFilmsMoviesList("");
-    setBeatFilmsMoviesList("");
+    setBeatFilmsIsShort("");
     setBeatFilmsSearchText("");
     setSavedMoviesIsShort("");
     setSavedMoviesSearchText("");
