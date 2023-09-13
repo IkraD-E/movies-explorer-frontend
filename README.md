@@ -1,7 +1,7 @@
 # movies-explorer-frontend
 Backend of graduate work 
 
-Github pull request: [Github](https://github.com/IkraD-E/movies-explorer-frontend/pull/7)
+Github pull request: [Github](https://github.com/IkraD-E/movies-explorer-frontend/pull/8)
 ССЫЛКА НА ПУЛ РЕКВЕСТ: [Github](https://github.com/IkraD-E/movies-explorer-frontend/pull/7)
 
 You can see page here: [Github.io](https://ikrad-e.github.io/movies-explorer-frontend/)
