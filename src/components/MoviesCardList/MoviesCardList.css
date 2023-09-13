@@ -3,6 +3,7 @@
     width: 100%;
     padding: 80px 70px 30px;
     box-sizing: border-box;
+    min-height: 441px;
 
     background-color: #FAFAFA;
 }

@@ -7,16 +7,15 @@ import NavTab from "../NavTab/NavTab";
 import "./Navigation.css"
 
 function Navigation({ path, navTabOpen, tuggleClickNavTab, isLoggedIn }) {
-
   return (
     (path === "/signup" || path === "/signin") ? "" :
     (isLoggedIn ? (
       <>
         <nav className="nav">
-          <NavLink to="/movies" className='nav__link nav__link_bold'>
+          <NavLink to="/movies" className={`nav__link ${path==="/movies" ? 'nav__link_bold' : ""}`}>
             Фильмы
           </NavLink>
-          <NavLink to="/saved-movies" className='nav__link'>
+          <NavLink to="/saved-movies" className={`nav__link ${path==="/saved-movies" ? 'nav__link_bold' : ""}`}>
             Сохранённые фильмы
           </NavLink>
           <NavLink to="/profile" className='nav__container'>

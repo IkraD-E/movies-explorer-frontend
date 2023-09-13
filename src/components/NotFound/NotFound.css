@@ -52,6 +52,8 @@
     margin: 184px 0 0;
     padding: 0;
     display: block;
+
+    cursor: pointer;
 }
 
 .not-found__link:hover {

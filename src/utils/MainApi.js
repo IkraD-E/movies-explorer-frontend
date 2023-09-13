@@ -69,7 +69,7 @@ class MainApi{
     }
 
     //Аутентификация пользователя на сервере
-    handleUserAuthorization(email, password) {
+    handleUserAuthorization({email, password}) {
         return this._request(
             `${this._link}signin`, 
             {

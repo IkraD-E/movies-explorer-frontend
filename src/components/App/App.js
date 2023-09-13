@@ -21,44 +21,41 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { movieUrl } from "../../consts/urls";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [currentUser, setUserData] = React.useState({});
   const [beatFilmsMoviesList, setBeatFilmsMoviesList] = React.useState(null);
   const [beatFilmsSearchText, setBeatFilmsSearchText] = React.useState(
     localStorage.getItem('beatFilmsSearchText') ?? '' 
   );
   function setBeatFilmsSearchTextInStorage(data) {
-    setSavedMoviesSearchText(data);
+    setBeatFilmsSearchText(data);
     localStorage.setItem('beatFilmsSearchText', data)
   }
-
   const [beatFilmsIsShort, setBeatFilmsIsShort] = React.useState(
-    localStorage.getItem('beatFilmsIsShort') ?? '' 
+    JSON.parse(localStorage.getItem('beatFilmsIsShort')) ?? false
   );
-
   function tugleisBeatFilmsIsShort() {
     localStorage.setItem('beatFilmsIsShort', JSON.stringify(!beatFilmsIsShort));
-    setBeatFilmsIsShort(!beatFilmsIsShort)
+    setBeatFilmsIsShort(!beatFilmsIsShort);
   }
+
+
+
+
 
   const [savedMovieList, setSavedMovies] = React.useState([]);
   const [savedMoviesSearchText, setSavedMoviesSearchText] = React.useState('');
-  function setSavedMoviesSearchTextInStorage(data) {
-    setSavedMoviesSearchText(data);
-    localStorage.setItem('savedSearchText', data)
-  }
-  const [savedMoviesIsShort, setSavedMoviesIsShort] = React.useState(
-    localStorage.getItem('savedMoviesIsShort') ?? '' 
-  );
+  const [savedMoviesIsShort, setSavedMoviesIsShort] = React.useState(false);
   function tugleisSavedFilmsIsShort() {
     localStorage.setItem('savedMoviesIsShort', JSON.stringify(!savedMoviesIsShort));
     setSavedMoviesIsShort(!savedMoviesIsShort)
   }
   const navigate = useNavigate();
-  
 
   const [isLoading, setIsLoading] = React.useState(false);
   const [isFetching, setIsFetching] = React.useState(false);
+
+  const [infoToolTipMassage, setInfoToolTipMassage] = React.useState("Что-то произошло");
 
   function movieEdit(moviesData) {
     const newMoviesData = moviesData.map((movie) => {
@@ -96,7 +93,7 @@ function App() {
   }, [])
 
   React.useEffect(() => {
-    if (!beatFilmsMoviesList) {
+    if (!beatFilmsMoviesList && beatFilmsSearchText.length > 0) {
       if ('beatFilmsMovies' in localStorage) {
         const filmList = movieEdit(JSON.parse(localStorage.getItem('beatFilmsMovies')));
         setBeatFilmsMoviesList(filmList);
@@ -114,12 +111,12 @@ function App() {
           .finally(() => setIsLoading(false));
       }
     }
-  }, [beatFilmsMoviesList])
+  }, [beatFilmsMoviesList, beatFilmsSearchText, beatFilmsIsShort])
 
   React.useEffect(() => {
     isLoggedIn && Promise.all(
         [
-          mainApi.getUserDataFromServer(), 
+          mainApi.getUserDataFromServer(),
         ])
       .then(([userData]) => {
         setUserData(userData);
@@ -154,13 +151,15 @@ function App() {
     setIsFetching(true);
     mainApi.addNewUserToServer(email, password, name)
       .then((res) =>{
-        setIsLoggedIn(true);
         handleSetServerCallbackStatus(res);
+        setInfoToolTipMassage("Вы успешно зарегестрированны")
+        setIsLoggedIn(true);
         navigate("/movies", {replace: true});
       })
       .catch(err => {
         handleSetServerCallbackStatus(err);
         handleOpenInfoTooltipPopup();
+        setInfoToolTipMassage(err.status === 409 ? "Почта уже используется" : "Что-то пошло не так")
         console.log(`Ошибка добавления нового пользователя на сервер: ${err.status}`);
       })
       .finally(() => setIsFetching(false));
@@ -168,7 +167,7 @@ function App() {
 
   function handleLogInSubmit({email, password}) {
     setIsFetching(true);
-    mainApi.handleUserAuthorization(email, password)
+    mainApi.handleUserAuthorization({email, password})
       .then((data) =>{
         if (data){
           setIsLoggedIn(true);
@@ -177,6 +176,7 @@ function App() {
         }
       })
       .catch(err => {
+        setInfoToolTipMassage(err.status === 500 ? "Ошибка на сервере, попробуйте зайти позднее" : "Неправильный логин или пароль")
         handleSetServerCallbackStatus(err);
         handleOpenInfoTooltipPopup();
         console.log(`Ошибка входа пользователя: ${err}`);
@@ -184,23 +184,6 @@ function App() {
       .finally(() => setIsFetching(false));
   }
 
-  function handleSignOut() {
-    mainApi.logout();
-    setIsLoggedIn(false);
-    setBeatFilmsMoviesList("");
-    setBeatFilmsMoviesList("");
-    setBeatFilmsSearchText("");
-    setSavedMoviesIsShort("");
-    setSavedMoviesSearchText("");
-    setSavedMoviesIsShort("");
-    navigate('/');
-    setUserData("");
-  }
-
-  function closeAllPopups() {
-    setIsInfoTooltipPopupOpen(false);
-  }
-  
   function onMovieSaveClick(movieData) {
     const isSaved = savedMovieList.some(saved => saved.movieId === movieData.movieId);
     if (!isSaved) {
@@ -224,12 +207,6 @@ function App() {
     }
   }
   const filtredMovies = React.useCallback((movies, searchText, isShort) => {
-    if (searchText === null) {
-      localStorage.setItem('beatFilmsSearchText', "")
-      console.log(localStorage.getItem('beatFilmsSearchText'))
-      searchText = localStorage.getItem('beatFilmsSearchText');
-      
-    }
     if (!movies) {
       return null;
     }
@@ -242,7 +219,6 @@ function App() {
 
   function handleProfileSubmit({ name, email }){
     setIsFetching(true);
-    console.log(name, email);
     mainApi
       .setUserInfo(name, email)
       .then((userData) => {
@@ -250,17 +226,50 @@ function App() {
           name: userData.name,
           email: userData.email,
         });
-        isInfoTooltipPopupOpen(true);
+        setServerCallbackStatus(userData);
+        setInfoToolTipMassage("Данные о пльзователе успешно изменены!")
       })
       .catch((err) => {
-        if (err === 409) {
+        if (err.status === 409) {
           console.log(`Пользователь с указанной почтой уже существует: ${err}`);
+          setInfoToolTipMassage("Пользователь с указанной почтой уже существует")
         } else {
+          setInfoToolTipMassage(err.status === 500 ? "Ошибка на сервере, попробуйте зайти позднее" : "Что-то пошло не так")
           console.log(`Ошибка: ${err}`);
         }
+        console.log(err.ok);
+        handleSetServerCallbackStatus(err);
       })
-      .finally(() => setIsFetching(false));
+      .finally(() =>{
+        setIsInfoTooltipPopupOpen(true);
+        setIsFetching(false)
+      });
   };
+
+  function handleSignOut() {
+    mainApi.logout();
+    setIsLoggedIn(false);
+    setBeatFilmsMoviesList("");
+    setBeatFilmsIsShort("");
+    setBeatFilmsSearchText("");
+    setSavedMoviesIsShort("");
+    setSavedMoviesSearchText("");
+    setSavedMoviesIsShort("");
+    navigate('/');
+    setUserData("");
+    localStorage.removeItem('beatFilmsMovies');
+    localStorage.removeItem('beatFilmsSearchText');
+    localStorage.removeItem('beatFilmsIsShort');
+  }
+
+  function closeAllPopups() {
+    setIsInfoTooltipPopupOpen(false);
+    setTimeout(() => {
+      setTimeout(setInfoToolTipMassage(""));
+    }, 1000);
+    
+  }
+  
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="body">
@@ -336,7 +345,7 @@ function App() {
                 )}
                 isLoggedIn={isLoggedIn}
                 searchText={savedMoviesSearchText}
-                setSearchText={setSavedMoviesSearchTextInStorage}
+                setSearchText={setSavedMoviesSearchText}
                 onMovieSaveClick={onMovieSaveClick}
                 isShort={savedMoviesIsShort}
                 setIsShort={tugleisSavedFilmsIsShort}
@@ -361,6 +370,7 @@ function App() {
             isOpen={isInfoTooltipPopupOpen}
             onClose={closeAllPopups}
             serverCallbackStatus={serverCallbackStatus}
+            infoToolTipMassage={infoToolTipMassage}
           />
         </div>
     </div>
