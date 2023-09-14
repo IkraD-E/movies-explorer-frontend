@@ -40,6 +40,7 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
 
 
     useEffect(() => {
+        window.addEventListener('resize', checkWindowWidth);
         if (searchText.length || isShort) {
           moviesCards();
         }
