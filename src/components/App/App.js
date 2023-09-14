@@ -117,22 +117,17 @@ function App() {
     isLoggedIn && Promise.all(
         [
           mainApi.getUserDataFromServer(),
+          mainApi.getSavedMoviesFromServer()
         ])
-      .then(([userData]) => {
+      .then(([userData, savedMovie]) => {
         setUserData(userData);
+        console.log(savedMovie.reverse());
+        setSavedMovies(savedMovie.reverse());
         localStorage.setItem('beatFilmsSearchText', beatFilmsSearchText);
         localStorage.setItem(
           'beatFilmsIsShort',
           JSON.stringify(beatFilmsIsShort)
         );
-    })
-      .catch(err => console.log(err));
-  }, [isLoggedIn]);
-
-  React.useEffect(() => {
-    isLoggedIn && mainApi.getSavedMoviesFromServer()
-      .then((movies) => {
-        setSavedMovies(movies.reverse());
     })
       .catch(err => console.log(err));
   }, [isLoggedIn]);
@@ -342,6 +337,7 @@ function App() {
                   savedMoviesSearchText,
                   savedMoviesIsShort,
                 )}
+                savedMovieList={savedMovieList}
                 isLoggedIn={isLoggedIn}
                 searchText={savedMoviesSearchText}
                 setSearchText={setSavedMoviesSearchText}

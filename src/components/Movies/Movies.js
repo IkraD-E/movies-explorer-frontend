@@ -14,7 +14,6 @@ function Movies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsS
     [setSearchText]
   );
 
-
   return (
     <main className="movies-list">
       <Search
