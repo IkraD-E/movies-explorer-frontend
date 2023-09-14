@@ -5,7 +5,7 @@ import Search from "../Search/Search";
 
 import "./SavedMovies.css"
 
-function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsShort, isLoading, searchText, setSearchText}) {
+function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, setIsShort, isLoading, searchText, setSearchText, savedMovieList}) {
   const handleSearchButtonClick = React.useCallback(
     (input) => {
       setSearchText(input);
@@ -23,6 +23,7 @@ function SavedMovies({onCardDeleteClick, onMovieSaveClick, movieList, isShort, s
       />
       <MoviesCardList
         movieList={movieList} 
+        savedMovieList={savedMovieList}
         onMovieSaveClick={onMovieSaveClick}
         onCardDeleteClick={onCardDeleteClick}
         isLoading={isLoading}

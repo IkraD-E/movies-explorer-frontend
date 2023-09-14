@@ -191,9 +191,6 @@
 }
 
 @media screen and (max-width: 425px) {
-    .nav-tab {
-        padding: 17px 17px 46px;
-    }
     .nav-tab__link{
         margin-top: 24px;
     }
