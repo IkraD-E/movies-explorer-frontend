@@ -116,12 +116,10 @@ function App() {
   React.useEffect(() => {
     isLoggedIn && Promise.all(
         [
-          mainApi.getUserDataFromServer(),
-          mainApi.getSavedMoviesFromServer()
+          mainApi.getUserDataFromServer()
         ])
-      .then(([userData, savedMovie]) => {
+      .then(([userData]) => {
         setUserData(userData);
-        setSavedMovies(savedMovie.reverse());
         localStorage.setItem('beatFilmsSearchText', beatFilmsSearchText);
         localStorage.setItem(
           'beatFilmsIsShort',
@@ -130,7 +128,16 @@ function App() {
     })
       .catch(err => console.log(err));
   }, [isLoggedIn]);
-
+  React.useEffect(() => {
+    isLoggedIn && Promise.all(
+        [
+          mainApi.getSavedMoviesFromServer()
+        ])
+      .then(([savedMovie]) => {
+        setSavedMovies(savedMovie.reverse());
+    })
+      .catch(err => console.log(err));
+  }, [isLoggedIn]);
   const [serverCallbackStatus, setServerCallbackStatus] = React.useState(false);
   function handleSetServerCallbackStatus(res) {
     setServerCallbackStatus(res.ok);
