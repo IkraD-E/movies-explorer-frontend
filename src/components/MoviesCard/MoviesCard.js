@@ -18,7 +18,6 @@ export default function MoviesCard({card, onMovieSaveClick, savedMovieList}) {
 
     function handleCardSaveClick() {
         onMovieSaveClick(card)
-        console.log(card);
     }
 
     return (

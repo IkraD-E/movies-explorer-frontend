@@ -12,7 +12,6 @@ export default function MoviesCardList({movieList, onMovieSaveClick, savedMovieL
     const [movieCount, setMovieCount] = useState(0);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    console.log(`asdf ${movieCount}`);
     const moviesCards = React.useCallback(() => {
         if (windowWidth > 1024) {
             setMovieCount(12);

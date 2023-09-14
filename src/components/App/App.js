@@ -121,7 +121,6 @@ function App() {
         ])
       .then(([userData, savedMovie]) => {
         setUserData(userData);
-        console.log(savedMovie.reverse());
         setSavedMovies(savedMovie.reverse());
         localStorage.setItem('beatFilmsSearchText', beatFilmsSearchText);
         localStorage.setItem(
